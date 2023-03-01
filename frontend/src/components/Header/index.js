@@ -32,6 +32,14 @@ const Header = () => {
         >
           Sign In
         </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "activeStyle" : "inactiveStyle"
+          }
+          to={"/projects"}
+        >
+          Projects
+        </NavLink>
       </div>
     </header>
   );
