@@ -1,0 +1,17 @@
+.activeStyle {
+  color: rgba(211, 211, 211, 0.514);
+  cursor: default;
+}
+
+.inactiveStyle {
+  color: white;
+}
+
+.navigation {
+  display: flex;
+}
+
+.navigation a {
+  padding: 10px;
+  text-decoration: none;
+}
