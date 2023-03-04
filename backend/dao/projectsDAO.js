@@ -8,7 +8,7 @@ export default class ProjectsDAO {
       return
     }
     try {
-      projects = await conn.db(process.env.PROJECTS_NS).collection("Projects")
+      projects = await conn.db(process.env.PROJECTS_NS).collection("projects")
     } catch (e) {
       console.error(
         `Unable to establish a collection handle in projectsDAO: ${e}`,
@@ -25,10 +25,10 @@ export default class ProjectsDAO {
     if (filters) {
       if ("name" in filters) {
         query = { $text: { $search: filters["name"] } }
-      } else if ("cuisine" in filters) {
-        query = { "cuisine": { $eq: filters["cuisine"] } }
-      } else if ("zipcode" in filters) {
-        query = { "address.zipcode": { $eq: filters["zipcode"] } }
+      } else if ("progress" in filters) {
+        query = { "progress": { $eq: filters["progress"] } }
+      } else if ("status" in filters) {
+        query = { "status": { $eq: filters["status"] } }
       }
     }
 
