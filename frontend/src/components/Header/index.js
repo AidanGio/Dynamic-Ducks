@@ -5,7 +5,7 @@ import "./styles.scss";
 
 const Header = () => {
   return (
-    <header>
+    <header className="header">
       <h1>Dynamic Ducks</h1>
       <div className="navigation">
         <NavLink
@@ -31,14 +31,6 @@ const Header = () => {
           to={"/signin"}
         >
           Sign In
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "activeStyle" : "inactiveStyle"
-          }
-          to={"/projects"}
-        >
-          Projects
         </NavLink>
       </div>
     </header>

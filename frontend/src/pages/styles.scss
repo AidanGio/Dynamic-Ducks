@@ -1,12 +1,23 @@
 .homepagelink {
   border: 1px solid white;
-  color: white;
+  color: rgb(255, 255, 255);
   background-color: black;
   padding: 10px;
   margin: 10px;
   text-decoration: none;
   border-radius: 10px;
   width: 50%;
+}
+
+body {
+  background-color: #F7EDF0; /* Replace with your desired background color */
+}
+
+.role-dropdown {
+  height: 39.5px;
+  margin: 5px;
+  padding: 10px;
+  color: FieldText;
 }
 
 .card {

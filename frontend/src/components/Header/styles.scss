@@ -1,10 +1,10 @@
 .activeStyle {
-  color: rgba(211, 211, 211, 0.514);
+  color: rgba(30, 30, 30, 0.514);
   cursor: default;
 }
 
 .inactiveStyle {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .navigation {
@@ -14,4 +14,9 @@
 .navigation a {
   padding: 10px;
   text-decoration: none;
+}
+
+.header {
+  background-color: #F4AFAB; /* Replace with your desired header background color */
+  color: #000000; /* Replace with your desired header text color */
 }

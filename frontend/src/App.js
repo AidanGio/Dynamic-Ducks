@@ -3,7 +3,10 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import ProjectPage from "./pages/ProjectPage";
+import ClientPortal from "./pages/ClientPortal";
+import SalesPortal from "./pages/SalesPortal";
+import GroundsCrewPortal from "./pages/GroundsCrewPortal";
+import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 
 function App() {
   return (
@@ -13,7 +16,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
-          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/client-portal" element={<ClientPortal />} />
+          <Route path="/sales-portal" element={<SalesPortal />} />
+          <Route path="/grounds-crew-portal" element={<GroundsCrewPortal />} />
+          <Route path="/operations-manager-portal" element={<OperationsManagerPortal />} />
         </Routes>
       </BrowserRouter>
     </div>
