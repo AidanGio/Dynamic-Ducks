@@ -1,0 +1,6 @@
+{
+  "mongoConfig": {
+    "serverUrl": "mongodb+srv://DBUser:AinxrlFVST751lmk@cluster0.pgdobwk.mongodb.net/Projects?retryWrites=true&w=majority",
+    "database": "cluster0"
+  }
+}
