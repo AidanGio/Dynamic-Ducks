@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const MainLayout = (props) => {
   return (
     <>
-      <Header />
+      <Header title={'Dynamic Ducks'} />
       <main>{props.children}</main>
 
       <Footer />

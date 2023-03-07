@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 
 import "./styles.scss";
 
-const Header = () => {
+const Header = ({ title }) => {
   return (
     <header className="header">
-      <h1>Dynamic Ducks</h1>
+      <h1>{title}</h1>
       <div className="navigation">
         <NavLink
           className={({ isActive }) =>

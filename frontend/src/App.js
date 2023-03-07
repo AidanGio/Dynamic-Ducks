@@ -16,10 +16,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
-          <Route path="/client-portal" element={<ClientPortal />} />
-          <Route path="/sales-portal" element={<SalesPortal />} />
-          <Route path="/grounds-crew-portal" element={<GroundsCrewPortal />} />
-          <Route path="/operations-manager-portal" element={<OperationsManagerPortal />} />
+          <Route path="/clientportal" element={<ClientPortal />} />
+          <Route path="/salesportal" element={<SalesPortal />} />
+          <Route path="/groundscrewportal" element={<GroundsCrewPortal />} />
+          <Route path="/operationsmanagerportal" element={<OperationsManagerPortal />} />
         </Routes>
       </BrowserRouter>
     </div>

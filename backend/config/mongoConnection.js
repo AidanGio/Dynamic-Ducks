@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-import settings from "./settings.json";
+import settings from "./settings.json" assert { type: "json" };
 
 let _connection = undefined;
 let _db = undefined;

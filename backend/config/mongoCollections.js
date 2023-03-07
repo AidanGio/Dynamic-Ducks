@@ -1,4 +1,4 @@
-import { dbConnection } from "./mongoConnection";
+import { dbConnection } from "./mongoConnection.js";
 
 const getCollectionFn = (collection) => {
   let _collection = undefined;
@@ -8,6 +8,7 @@ const getCollectionFn = (collection) => {
       const db = await dbConnection();
       _collection = await db.collection(collection);
     }
+    return _collection;
   };
 };
 
