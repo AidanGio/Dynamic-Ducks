@@ -14,16 +14,16 @@ const SignInPage = () => {
 
     switch (role) {
       case "Client Portal":
-        window.location.href = "/client-portal";
+        window.location.href = "/clientportal";
         break;
       case "Sales Portal":
-        window.location.href = "/sales-portal"; 
+        window.location.href = "/salesportal"; 
         break;
       case "Grounds Crew Portal":
-        window.location.href = "/grounds-crew-portal";
+        window.location.href = "/groundscrewportal";
         break;
       case "Operations Manager Portal":
-        window.location.href = "/operations-manager-portal";
+        window.location.href = "/operationsmanagerportal";
         break;
       default:
         console.log("Invalid role selected.");
