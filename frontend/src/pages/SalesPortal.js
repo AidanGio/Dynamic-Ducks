@@ -1,5 +1,6 @@
 import React from "react";
 import SalesLayout from "../layouts/SalesLayout";
+import "./styles.scss"
 
 // dummy projects for visual purposes, need to use projects from the database
 const dummyProjects = [
@@ -8,7 +9,9 @@ const dummyProjects = [
 ];
 function ProjectRow({project}){
   return (
-    <tr>
+    <tr style={{
+      boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
+      }}>
       <td>{project.name}</td>
       <td>{project.startDate}</td>
       <td>{project.endDate}</td>
