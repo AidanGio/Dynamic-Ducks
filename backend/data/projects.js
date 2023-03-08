@@ -16,14 +16,13 @@ const deleteProject = async (projectID) => {
   const database = await dbConnection();
   let projectsCollection = await database.collection("projects");
 
-  const deleteResult = projectsCollection.deleteOne({_id : projectID});
+  const deleteResult = projectsCollection.deleteOne({ _id: projectID });
 
   if (deleteResult.deletedCount == 1) {
-    console.log("Successfully deleted one project with ID ${projectID}");
+    console.log(`Successfully deleted one project with ID ${projectID}`);
+  } else {
+    console.log(`Could not delete project with ID ${projectID}`);
   }
-  else {
-    console.log("Could not delete project with ID ${projectID}")
-  }
-}
+};
 
-export { getAllProjects };
+export { getAllProjects, deleteProject };

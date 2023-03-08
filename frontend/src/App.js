@@ -19,7 +19,10 @@ function App() {
           <Route path="/clientportal" element={<ClientPortal />} />
           <Route path="/salesportal" element={<SalesPortal />} />
           <Route path="/groundscrewportal" element={<GroundsCrewPortal />} />
-          <Route path="/operationsmanagerportal" element={<OperationsManagerPortal />} />
+          <Route
+            path="/operationsmanagerportal"
+            element={<OperationsManagerPortal />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
