@@ -28,7 +28,7 @@ const deleteProject = async (projectID) => {
 const createProject = async (obj) => {
   let projectsCollection = await projects();
 
-  const insertInfo = await projectsCollection.insertOne({ ...obj });
+  const insertInfo = await projectsCollection.insertOne({...obj});
 
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
     throw { status: 400, msg: "Could not add project" };
