@@ -12,6 +12,21 @@ const getAllProjects = async () => {
   return res;
 };
 
+const createProject = async (projName) => {
+  const database = await dbConnection();
+  let projectsCollection = await database.collection("projects");
+
+  const doc = {
+    name:projName,
+    'Start Date':''
+  }
+
+  const insertResult = await projectsCollection.insertOne(doc)
+
+
+  console.log(`A document was inserted with the _id: ${insertResult.insertedId}`)
+}
+
 const deleteProject = async (projectID) => {
   const database = await dbConnection();
   let projectsCollection = await database.collection("projects");
@@ -26,4 +41,5 @@ const deleteProject = async (projectID) => {
   }
 }
 
+export { createProject };
 export { getAllProjects };
