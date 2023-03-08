@@ -1,15 +1,18 @@
-const { createUser, getUserById, deleteUser } = require("../data/users");
-
 import express from "express";
+import {
+  createUser,
+  deleteUser,
+  getAllUsers,
+  getUserById,
+} from "../data/users.js";
 
 // let User = require("../models/user.model");
 
 const router = express.Router();
 
-router.route("/").get((req, res) => {
-  User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("Error: " + err));
+router.route("/").get(async (req, res) => {
+  const result = await getAllUsers();
+  res.json(result);
 });
 
 router.route("/").post(async (req, res) => {
