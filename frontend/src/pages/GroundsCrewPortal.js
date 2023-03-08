@@ -1,5 +1,6 @@
 import React from "react";
 import GroundCrewLayout from "../layouts/GroundCrewLayout";
+import "./styles.scss";
 
 const GroundsCrewPortal = () => {
   const projects = [
@@ -32,7 +33,7 @@ const GroundsCrewPortal = () => {
   return (
     <GroundCrewLayout>
       <h1>Grounds Crew Portal</h1>
-      <table>
+      <table className="my-table">
         <thead>
           <tr>
             <th>Project Name</th>
@@ -47,7 +48,7 @@ const GroundsCrewPortal = () => {
           </tr>
         </thead>
         <tbody>
-        {projects.map((project) => (
+          {projects.map((project) => (
             <tr key={project.id}>
               <td>{project.name}</td>
               <td>{project.startDate}</td>
