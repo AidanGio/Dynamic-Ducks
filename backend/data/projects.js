@@ -49,7 +49,7 @@ const updateProject = async (projectID, field, newValue) => {
 
 const deleteProject = async (projectID) => {
   const database = await dbConnection();
-  let projectsCollection = await database.collection("projects");
+  let projectsCollection = await projects();
 
   const deleteResult = projectsCollection.deleteOne({ _id: projectID });
 
