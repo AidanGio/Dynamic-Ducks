@@ -27,4 +27,10 @@ const deleteUser = async (id) => {
   return user;
 };
 
-export { createUser, getUserById, deleteUser };
+const getAllUsers = async () => {
+  const usersCollection = await users();
+  const usersData = await usersCollection.find({}).toArray();
+  return usersData;
+};
+
+export { createUser, getUserById, deleteUser, getAllUsers };
