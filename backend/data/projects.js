@@ -1,5 +1,6 @@
 import { projects } from "../config/mongoCollections.js";
 import { closeConnection, dbConnection } from "../config/mongoConnection.js";
+import { ObjectId } from "mongodb";
 
 const getAllProjects = async () => {
   let projectsCollection;
@@ -18,13 +19,32 @@ const createProject = async (projName) => {
 
   const doc = {
     name:projName,
-    'Start Date':''
+    'Start Date':'',
+    'End Date':'',
+    'Stage':'Design',
+    'Progress':0,
+    'Billing Status':false
   }
 
   const insertResult = await projectsCollection.insertOne(doc)
 
-
   console.log(`A document was inserted with the _id: ${insertResult.insertedId}`)
+}
+
+const updateProject = async (projectID, field, newValue) => {
+  const database = await dbConnection();
+  let projectsCollection = await database.collection("projects");
+
+  const objectId = new ObjectId(projectID)
+
+  console.log(objectId.toString())
+  const updatefield = field
+  const updateResult = projectsCollection.updateOne(
+    {"_id":objectId},
+    {$set:{updatefield:newValue}}
+  );
+  
+  console.log(`Updated documented with _id ${projectID}`)
 }
 
 const deleteProject = async (projectID) => {
@@ -40,4 +60,4 @@ const deleteProject = async (projectID) => {
   }
 };
 
-export { getAllProjects, deleteProject, createProject };
+export { getAllProjects, deleteProject, createProject, updateProject };
