@@ -1,16 +1,10 @@
 import { ObjectId } from "mongodb";
 import { users } from "../config/mongoCollections.js";
 
-const createUser = async ({ firstName, lastName, password, role }) => {
+const createUser = async (obj) => {
   const usersCollection = await users();
 
-  const insertInfo = await usersCollection.insertOne({
-    firstName,
-    lastName,
-    address,
-    password,
-    role,
-  });
+  const insertInfo = await usersCollection.insertOne({ ...obj });
 
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
     throw { status: 400, msg: "Could not add users" };

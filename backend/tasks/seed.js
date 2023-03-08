@@ -7,6 +7,8 @@ const userData = {
   lastName: "lastName",
   address: "address",
   password: "password",
+  phone: "76672e872",
+  email: "a@b.com",
   role: "role",
 };
 
@@ -18,6 +20,12 @@ const projectData = {
   status: 1,
   billingStatus: true,
   users: "users",
+  permitStatus: "permit",
+  laborHours: "laborHours",
+  materialDetails: "materialDetails",
+  solarSystemInfo: "solarSystemInfo",
+  inspectionInfo: "inspectionInfo",
+  closeOutInfo: "closeOutInfo",
 };
 
 const main = async () => {
