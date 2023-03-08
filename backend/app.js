@@ -1,7 +1,11 @@
 import express from "express";
 import constructRoutes from "./routes/index.js";
 
+import cors from "cors";
+
 const app = express();
+
+app.use(cors());
 
 constructRoutes(app);
 
