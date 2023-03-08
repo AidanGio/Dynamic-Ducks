@@ -14,7 +14,7 @@ const getAllProjects = async () => {
 
 const deleteProject = async (projectID) => {
   const database = await dbConnection();
-  let projectsCollection = await database.collection("projects");
+  let projectsCollection = await projects();
 
   const deleteResult = projectsCollection.deleteOne({ _id: projectID });
 
@@ -25,4 +25,15 @@ const deleteProject = async (projectID) => {
   }
 };
 
-export { getAllProjects, deleteProject };
+const createProject = async (obj) => {
+  let projectsCollection = await projects();
+
+  const insertInfo = await projectsCollection.insertOne({...obj});
+
+  if (!insertInfo.acknowledged || !insertInfo.insertedId)
+    throw { status: 400, msg: "Could not add project" };
+
+  return insertInfo;
+};
+
+export { getAllProjects, deleteProject, createProject };
