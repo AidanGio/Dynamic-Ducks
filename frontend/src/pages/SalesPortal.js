@@ -10,7 +10,7 @@ const dummyProjects = [
 function ProjectRow({project}){
   return (
     <tr style={{
-      boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
+        boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
       }}>
       <td>{project.name}</td>
       <td>{project.startDate}</td>
@@ -59,15 +59,15 @@ function ProjectTable({projects, active}){
 
 const SalesPortal = () => {
   return (
-  <SalesLayout>
-    <h1>Sales Portal</h1>
-    <div>
-      <h2>Current Projects</h2>
+    <SalesLayout>
+      <h1>Sales Portal</h1>
+      <div>
+        <h2>Current Projects</h2>
         <ProjectTable projects={dummyProjects} />
-      <h2>Past Projects</h2>
+        <h2>Past Projects</h2>
         <ProjectTable projects={dummyProjects}  />
-    </div>
-  </SalesLayout>
+      </div>
+    </SalesLayout>
   );
 };
 

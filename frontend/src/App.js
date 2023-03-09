@@ -7,6 +7,7 @@ import ClientPortal from "./pages/ClientPortal";
 import SalesPortal from "./pages/SalesPortal";
 import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
+import TaskManagement from "./pages/TaskManagement";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             path="/operationsmanagerportal"
             element={<OperationsManagerPortal />}
           />
+
+          <Route path="/task" element={<TaskManagement />} />
         </Routes>
       </BrowserRouter>
     </div>
