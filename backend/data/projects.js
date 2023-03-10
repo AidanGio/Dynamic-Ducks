@@ -1,5 +1,4 @@
 import { projects } from "../config/mongoCollections.js";
-import { closeConnection, dbConnection } from "../config/mongoConnection.js";
 import { ObjectId } from "mongodb";
 
 const getAllProjects = async () => {
@@ -13,51 +12,62 @@ const getAllProjects = async () => {
   return res;
 };
 
-const createProject = async (projName) => {
-  const database = await dbConnection();
-  let projectsCollection = await database.collection("projects");
-
-  const doc = {
-    name:projName,
-    'Start Date':'',
-    'End Date':'',
-    'Stage':'Design',
-    'Progress':0,
-    'Billing Status':false
-  }
-
-  const insertResult = await projectsCollection.insertOne(doc)
-
-  console.log(`A document was inserted with the _id: ${insertResult.insertedId}`)
-}
-
-const updateProject = async (projectID, field, newValue) => {
-  const database = await dbConnection();
-  let projectsCollection = await database.collection("projects");
-
-  const objectId = new ObjectId(projectID)
-
-  console.log(objectId.toString())
-  const updatefield = field
-  const updateResult = projectsCollection.updateOne(
-    {"_id":objectId},
-    {$set:{updatefield:newValue}}
-  );
-  
-  console.log(`Updated documented with _id ${projectID}`)
-}
-
-const deleteProject = async (projectID) => {
-  const database = await dbConnection();
+const createProject = async (body) => {
   let projectsCollection = await projects();
 
-  const deleteResult = projectsCollection.deleteOne({ _id: projectID });
+  const insertInfo = await projectsCollection.insertOne(body);
+
+  if (!insertInfo.acknowledged || !insertInfo.insertedId)
+    throw { status: 400, msg: "Could not add users" };
+
+  return await getProjectById(insertInfo.insertedId);
+};
+
+const updateProject = async (id, body) => {
+  let projectsCollection = await projects();
+
+  const insertInfo = await projectsCollection.updateOne(
+    {
+      _id: new ObjectId(id),
+    },
+    {
+      $set: { ...body },
+    }
+  );
+
+  if (!insertInfo.acknowledged || !insertInfo.modifiedCount) {
+    throw { status: 400, msg: "Could not modify project" };
+  }
+
+  return await getProjectById(id);
+};
+
+const deleteProject = async (id) => {
+  let projectsCollection = await projects();
+
+  const deleteResult = await projectsCollection.deleteOne({ _id: new ObjectId(id) });
 
   if (deleteResult.deletedCount == 1) {
+    return { deleted: true };
     console.log(`Successfully deleted one project with ID ${projectID}`);
   } else {
+    return { deleted: false };
     console.log(`Could not delete project with ID ${projectID}`);
   }
 };
 
-export { getAllProjects, deleteProject, createProject, updateProject };
+const getProjectById = async (id) => {
+  let projectsCollection = await projects();
+
+  const project = await projectsCollection.findOne({ _id: new ObjectId(id) });
+
+  return project;
+};
+
+export {
+  getAllProjects,
+  deleteProject,
+  createProject,
+  updateProject,
+  getProjectById,
+};

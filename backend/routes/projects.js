@@ -1,19 +1,63 @@
 import express from "express";
-import { createProject, getAllProjects, updateProject } from "../data/projects.js";
+import {
+  createProject,
+  deleteProject,
+  getAllProjects,
+  getProjectById,
+  updateProject,
+} from "../data/projects.js";
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  res.json(await getAllProjects());
+  try {
+    const result = await getAllProjects();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
-router.post("/create/:name", async (req,res) => {
-  //console.log(req.params.name);
-  res.json(await createProject(req.params.name));
+router.get("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    const result = await getProjectById(id);
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
-router.patch("/update/:_id/updateField/:field/newValue/:value", async (req,res) => {
-  res.json(await updateProject(req.params._id,req.params.field,req.params.value))
+router.post("/", async (req, res) => {
+  try {
+    let body = req.body;
+    let result = await createProject({ ...body });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let body = req.body;
+    let result = await updateProject(id, body);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    const result = await deleteProject(id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 export default router;
