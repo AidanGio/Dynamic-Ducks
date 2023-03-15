@@ -5,8 +5,8 @@ on:
 
 jobs:
   deploy:
-  name: Deploy
-  runs-on: unbuntu-latest
+    name: Deploy
+    runs-on: unbuntu-latest
   steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
