@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -9,6 +8,7 @@ import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 
+import "./App.scss";
 function App() {
   return (
     <div className="App">
@@ -25,7 +25,7 @@ function App() {
             element={<OperationsManagerPortal />}
           />
 
-          <Route path="/task" element={<TaskManagement />} />
+          <Route path="/tasks" element={<TaskManagement />} />
         </Routes>
       </BrowserRouter>
     </div>

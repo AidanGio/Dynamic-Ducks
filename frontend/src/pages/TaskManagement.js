@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import MainLayout from "../layouts/MainLayout";
-import axios from "axios";
+import Dashboard from "../components/Dashboard";
+
+import SideBar from "../components/SideBar";
+import Tasks from "../components/Tasks";
+
+import "./styles.scss";
 
 const projectData = {};
 
@@ -13,34 +17,20 @@ var dataDB = JSON.stringify({
 var config = {};
 
 const TaskManagement = () => {
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://us-east-1.aws.data.mongodb-api.com/app/data-hwgsk/endpoint/projects",
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Request-Headers": "*",
-            "api-key":
-              "KKbv2ryF8EdeNGf8Kr4DX9jzZQBvi40TuS4E9YlAO3tJWYdCgKmYe5yvn97pgOKd",
-          },
-          data: dataDB,
-        }
-      )
-      .then((res) => {
-        setData(res);
-      });
-  }, []);
-
-  console.log(data);
+  const [openTasks, setOpenTasks] = useState(false);
+  const [openDashboard, setOpenDashboard] = useState(true);
 
   return (
-    <MainLayout>
-      <h2>My Projects</h2>
-    </MainLayout>
+    <div className="taskmanagement">
+      <SideBar
+        setOpenDashboard={setOpenDashboard}
+        openDashboard={openDashboard}
+        openTasks={openTasks}
+        setOpenTasks={setOpenTasks}
+      />
+      {openTasks && <Tasks />}
+      {openDashboard && <Dashboard />}
+    </div>
   );
 };
 
