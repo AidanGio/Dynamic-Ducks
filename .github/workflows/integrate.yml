@@ -18,5 +18,5 @@ jobs:
           filters: |
             frontend: 
               - 'frontend/**'
-      - run: npm ci
+      - run: npm install
       - run: npm run build
