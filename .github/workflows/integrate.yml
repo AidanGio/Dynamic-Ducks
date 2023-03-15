@@ -7,7 +7,10 @@ jobs:
   deploy:
     name: Deploy
     runs-on: unbuntu-latest
-  steps:
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
     - uses: actions/setup-node@v1
