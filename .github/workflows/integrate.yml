@@ -16,6 +16,7 @@ jobs:
         id: filter
         with:
           filters: |
-            frontend: - 'frontend/**'
+            frontend: 
+              - 'frontend/**'
       - run: npm ci
       - run: npm run build
