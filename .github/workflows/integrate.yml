@@ -1,0 +1,23 @@
+name: Continuous Integration
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+  name: Deploy
+  runs-on: unbuntu-latest
+  steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          frontend: - 'frontend/**'
+    - name: Install Dependencies
+    - run: npm ci
+    - run: npm run build
