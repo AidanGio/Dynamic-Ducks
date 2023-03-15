@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from "./../../assets/images/solar.png";
 
 import "./styles.scss";
 
 const Header = ({ title }) => {
   return (
     <header className="header">
-      <h1>{title}</h1>
+      <img src={logo} height={"100%"} />
       <div className="navigation">
         <NavLink
           className={({ isActive }) =>
