@@ -15,21 +15,35 @@ const getAllLeads = async (req,res) => {
 
 // get single lead
 const getLead = async (req, res) => {
+    let leadsCollection;
+    try {
+      leadsCollection = await leads();
+    } catch (error) {
+      console.log(error);
+    }
+    
     const {id} = req.params
-
-    const aLead = await leadsCollection.findById({id})
-    console.log(aLead)
+    console.log(ObjectId(id))
+    const aLead = await leadsCollection.find({"_id": ObjectId(id)})
+    aLead
 }
 
 // create lead
 const createLead = async (req, res) => {
-    const {FirstName, LastName, Number} = req.body
-    console.log("test")
-    const doc = {
-        firstname: "test"
+    const {firstname, lastname, number} = req.body
+    let leadsCollection;
+    try {
+      leadsCollection = await leads();
+    } catch (error) {
+      console.log(error);
     }
-    const result = await leadsCollection.insertOne(doc)
-  
+    
+    try {
+        const result = await leadsCollection.insertOne( req.body )
+    } catch(error) {
+        console.log(error)
+    }
+    console.log(result)
 }
 
 // delete lead

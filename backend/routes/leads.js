@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
   });
 
 // get a single lead
-//router.get("/:id", getLead)
 router.get("/:id", async (req, res) => {
     try {
       let id = req.params.id;
