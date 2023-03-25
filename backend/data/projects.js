@@ -48,11 +48,11 @@ const deleteProject = async (id) => {
   const deleteResult = await projectsCollection.deleteOne({ _id: new ObjectId(id) });
 
   if (deleteResult.deletedCount == 1) {
-    return { deleted: true };
     console.log(`Successfully deleted one project with ID ${projectID}`);
+    return { deleted: true };
   } else {
-    return { deleted: false };
     console.log(`Could not delete project with ID ${projectID}`);
+    return { deleted: false };
   }
 };
 
