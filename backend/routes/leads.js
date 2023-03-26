@@ -2,13 +2,14 @@ import express from "express";
 import {
     getAllLeads,
     getLead,
-    createLead
+    createLead,
+    deleteLead,
+    updateLead
   } from "../data/leads.js";
 
 
 const router = express.Router();
 
-//router.get("/", getAllLeads)
 // get all leads
 router.get("/", async (req, res) => {
     try {
@@ -33,6 +34,26 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const result = await createLead(req,res);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// delete a lead
+router.delete("/:id", async (req, res) => {
+  try {
+    const result = await deleteLead(req,res);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// update a lead
+router.patch("/:id", async (req, res) => {
+  try {
+    const result = await updateLead(req,res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);

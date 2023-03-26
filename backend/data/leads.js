@@ -54,13 +54,49 @@ const createLead = async (req, res) => {
 };
 
 // delete lead
+const deleteLead = async (req, res) => {
+    let leadsCollection;
+    try {
+      leadsCollection = await leads();
+    } catch (error) {
+      console.log(error);
+    }
+    
+    const {id} = req.params
+ 
+    const query = { _id: new ObjectId(id) };
 
+    try {
+        const result = await leadsCollection.deleteOne(query)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // update lead
+const updateLead = async (req, res) => {
+    let leadsCollection;
+    try {
+      leadsCollection = await leads();
+    } catch (error) {
+      console.log(error);
+    }
+    
+    const { id } = req.params;
+    const query = { _id: new ObjectId(id) };
+    const update = { $set: req.body };
 
+    try {
+        const result = await leadsCollection.updateOne(query,update)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export {
     getAllLeads,
     getLead,
-    createLead
+    createLead,
+    deleteLead,
+    updateLead
 };
