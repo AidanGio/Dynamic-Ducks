@@ -22,9 +22,8 @@ router.get("/", async (req, res) => {
 // get a single lead
 router.get("/:id", async (req, res) => {
     try {
-      let id = req.params.id;
       const result = await getLead(req, res);
-      res.status(200).json(result);
+      res.json(result);
     } catch (error) {
       res.status(500).json(error);
     }

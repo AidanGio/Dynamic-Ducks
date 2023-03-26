@@ -1,5 +1,5 @@
 import { leads } from "../config/mongoCollections.js";
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
 // get all leads
 const getAllLeads = async (req,res) => {
@@ -23,10 +23,17 @@ const getLead = async (req, res) => {
     }
     
     const {id} = req.params
-    console.log(ObjectId(id))
-    const aLead = await leadsCollection.find({"_id": ObjectId(id)})
-    aLead
-}
+ 
+    const query = { _id: new ObjectId(id) };
+
+    try {
+        const aLead = await leadsCollection.find(query).toArray();
+        return aLead;
+    } catch (error) {
+        console.log(error)
+
+    }
+};
 
 // create lead
 const createLead = async (req, res) => {
@@ -37,14 +44,14 @@ const createLead = async (req, res) => {
     } catch (error) {
       console.log(error);
     }
-    
+    let result
     try {
-        const result = await leadsCollection.insertOne( req.body )
+        result = await leadsCollection.insertOne( req.body )
     } catch(error) {
         console.log(error)
     }
     console.log(result)
-}
+};
 
 // delete lead
 
