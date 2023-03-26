@@ -31,7 +31,25 @@ const getLead = async (req, res) => {
         return aLead;
     } catch (error) {
         console.log(error)
+    }
+};
 
+// retrieve successful leads
+const getSuccessfulLeads = async (req, res) => {
+    let leadsCollection;
+    try {
+      leadsCollection = await leads();
+    } catch (error) {
+      console.log(error);
+    }
+     
+    const query = {Success:"True"};
+
+    try {
+        const Leads = await leadsCollection.find(query).toArray();
+        return Leads;
+    } catch (error) {
+        console.log(error)
     }
 };
 
@@ -96,7 +114,8 @@ const updateLead = async (req, res) => {
 export {
     getAllLeads,
     getLead,
+    getSuccessfulLeads,
     createLead,
     deleteLead,
-    updateLead
+    updateLead,
 };

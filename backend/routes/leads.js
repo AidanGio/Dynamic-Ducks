@@ -2,6 +2,7 @@ import express from "express";
 import {
     getAllLeads,
     getLead,
+    getSuccessfulLeads,
     createLead,
     deleteLead,
     updateLead
@@ -21,9 +22,19 @@ router.get("/", async (req, res) => {
   });
 
 // get a single lead
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
     try {
       const result = await getLead(req, res);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
+// get successful leads
+router.get("/success", async (req, res) => {
+  try {
+      const result = await getSuccessfulLeads(req, res);
       res.json(result);
     } catch (error) {
       res.status(500).json(error);

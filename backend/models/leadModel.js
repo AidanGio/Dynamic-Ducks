@@ -14,6 +14,10 @@ const leadsSchema = new Schema({
     Number: {
         type: String,
         required: true
+    },
+    Success: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 
