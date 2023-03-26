@@ -55,7 +55,6 @@ const getSuccessfulLeads = async (req, res) => {
 
 // create lead
 const createLead = async (req, res) => {
-    const {firstname, lastname, number} = req.body
     let leadsCollection;
     try {
       leadsCollection = await leads();

@@ -1,6 +1,7 @@
 import { projects } from "../config/mongoCollections.js";
 import { ObjectId } from "mongodb";
 
+// Get all projects
 const getAllProjects = async () => {
   let projectsCollection;
   try {
@@ -12,15 +13,42 @@ const getAllProjects = async () => {
   return res;
 };
 
-const createProject = async (body) => {
-  let projectsCollection = await projects();
+// Get a single proejct
+const getProject = async (req,res) => {
+  let projectsCollection;
+  try {
+    projectsCollection = await projects();
+  } catch (error) {
+    console.log(error);
+  }
 
-  const insertInfo = await projectsCollection.insertOne(body);
+  const {id} = req.params
+ 
+  const query = { _id: new ObjectId(id) };
+
+  try {
+    const aProject = await projectsCollection.find(query).toArray();
+    return aProject;
+  } catch (error) {
+      console.log(error)
+  }
+};
+
+// Create a project
+const createProject = async (req,res) => {
+  let projectsCollection;
+  try {
+    projectsCollection = await projects();
+  } catch (error) {
+    console.log(error);
+  }
+
+  const insertInfo = await projectsCollection.insertOne(req.body);
 
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
-    throw { status: 400, msg: "Could not add users" };
+    throw { status: 400, msg: "Could not add project" };
 
-  return await getProjectById(insertInfo.insertedId);
+  return insertInfo.insertedId;
 };
 
 const updateProject = async (id, body) => {
@@ -56,18 +84,12 @@ const deleteProject = async (id) => {
   }
 };
 
-const getProjectById = async (id) => {
-  let projectsCollection = await projects();
 
-  const project = await projectsCollection.findOne({ _id: new ObjectId(id) });
-
-  return project;
-};
 
 export {
   getAllProjects,
   deleteProject,
   createProject,
   updateProject,
-  getProjectById,
+  getProject,
 };

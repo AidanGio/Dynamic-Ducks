@@ -3,12 +3,13 @@ import {
   createProject,
   deleteProject,
   getAllProjects,
-  getProjectById,
+  getProject,
   updateProject,
 } from "../data/projects.js";
 
 const router = express.Router();
 
+// Get all projects
 router.get("/", async (req, res) => {
   try {
     const result = await getAllProjects();
@@ -18,21 +19,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get a single project
 router.get("/:id", async (req, res) => {
   try {
-    let id = req.params.id;
-    const result = await getProjectById(id);
-
-    res.status(200).json(result);
+    const result = await getProject(req,res);
+    res.json(result);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
+// Create a single project
 router.post("/", async (req, res) => {
   try {
-    let body = req.body;
-    let result = await createProject({ ...body });
+    let result = await createProject(req,res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
