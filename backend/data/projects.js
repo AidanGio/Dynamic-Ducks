@@ -51,29 +51,19 @@ const createProject = async (req,res) => {
   return insertInfo.insertedId;
 };
 
-const updateProject = async (id, body) => {
-  let projectsCollection = await projects();
-
-  const insertInfo = await projectsCollection.updateOne(
-    {
-      _id: new ObjectId(id),
-    },
-    {
-      $set: { ...body },
-    }
-  );
-
-  if (!insertInfo.acknowledged || !insertInfo.modifiedCount) {
-    throw { status: 400, msg: "Could not modify project" };
+// Delete a project
+const deleteProject = async (req,res) => {
+  let projectsCollection;
+  try {
+    projectsCollection = await projects();
+  } catch (error) {
+    console.log(error);
   }
 
-  return await getProjectById(id);
-};
+  const {id} = req.params
+  const query = { _id: new ObjectId(id) };
 
-const deleteProject = async (id) => {
-  let projectsCollection = await projects();
-
-  const deleteResult = await projectsCollection.deleteOne({ _id: new ObjectId(id) });
+  const result = await projectsCollection.deleteOne(query)
 
   if (deleteResult.deletedCount == 1) {
     console.log(`Successfully deleted one project with ID ${projectID}`);
@@ -84,6 +74,25 @@ const deleteProject = async (id) => {
   }
 };
 
+// Update a lead
+const updateProject = async (req,res) => {
+  let projectsCollection;
+  try {
+    projectsCollection = await projects();
+  } catch (error) {
+    console.log(error);
+  }
+
+  const {id} = req.params
+  const query = { _id: new ObjectId(id) };
+  const update = { $set: req.body };
+
+  try {
+    const result = await projectsCollection.updateOne(query,update)
+  } catch (error) {
+      console.log(error)
+  }
+};
 
 
 export {

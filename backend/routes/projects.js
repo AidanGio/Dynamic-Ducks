@@ -39,21 +39,20 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+// Delete a project
+router.delete("/:id", async (req, res) => {
   try {
-    let id = req.params.id;
-    let body = req.body;
-    let result = await updateProject(id, body);
+    const result = await deleteProject(req,res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+// Update a project
+router.patch("/:id", async (req, res) => {
   try {
-    let id = req.params.id;
-    const result = await deleteProject(id);
+    const result = await updateProject(req,res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
