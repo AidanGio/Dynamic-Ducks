@@ -6,15 +6,18 @@ import Tasks from "../components/Tasks";
 
 import "./styles.scss";
 
-const projectData = {};
+//Hardcoded for now
+const taskData = [
+  {
+    company: "Abc",
+    task: "Complete following task",
+    priority: "High",
+    dueDate: "04/01/2023",
+    location: "location",
+  },
+];
 
-var dataDB = JSON.stringify({
-  collection: "projects",
-  database: "solar",
-  dataSource: "Cluster0",
-});
-
-var config = {};
+//DB function to find all tasks for particular user
 
 const TaskManagement = () => {
   const [openTasks, setOpenTasks] = useState(false);
@@ -28,7 +31,7 @@ const TaskManagement = () => {
         openTasks={openTasks}
         setOpenTasks={setOpenTasks}
       />
-      {openTasks && <Tasks />}
+      {openTasks && <Tasks data={taskData} />}
       {openDashboard && <Dashboard />}
     </div>
   );
