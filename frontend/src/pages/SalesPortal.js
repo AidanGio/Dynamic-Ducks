@@ -11,6 +11,7 @@ const dummyProjects = [
 ];
 
 
+
 function ProjectTable({projects}){
   return (
     <table>
@@ -32,8 +33,8 @@ function ProjectTable({projects}){
                     <td>{project["startDate"]}</td>
                     <td>{project["endDate"]}</td>
                     <td>{project["progress"]}</td>
-                    <td>{project["projectStatus"]}</td>
-                    <td>{project["billingStatus"]}</td>
+                    <td>{project["status"]*20 + "%"}</td>
+                    <td>{project["billingStatus"] ? "Payment Received" : "Pending"}</td>
                   </tr>
                 );
           })}
