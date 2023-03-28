@@ -3,13 +3,19 @@
   flex: 0.2;
   flex-direction: column;
   padding: 10px;
-  background-color: #f4afab;
+  background-color: #059be5;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
 
   img {
     height: 100px;
+    width: 100px;
     object-fit: contain;
     background-color: none;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
   }
   .btn-grp {
     display: flex;
@@ -19,17 +25,18 @@
     border-radius: 1em;
     min-height: 30vh;
     justify-content: center;
+    width: 90%;
 
     button {
       border: none;
       border-bottom: 1px solid gray;
       margin: 2px 0;
       transition: all ease-in-out 0.2s;
-      background-color: #f4afab;
+      background-color: #ffcb2b;
     }
 
     .active {
-      background-color: #f19691;
+      background-color: #ffa611;
       color: white;
     }
   }
