@@ -5,62 +5,77 @@ import SalesLayout from "../layouts/SalesLayout";
 import "./styles.scss";
 
 function CreateLeadButton() {
-
+  
+  return (
+    <button>Create New Lead</button>
+  )
 }
 
-const LeadManagement = () => {
-    const [leads, setLeads] = useState([]);
+function InvitePopup() {
+  return (
+    <Popup trigger={<button> Invite </button>} position="right center">
+      <div style={{
+        backgroundColor: "white",
+        padding: "15px",
+      }}>
+        <div>Invite Operations Manager to Create Project</div>
+        
+      </div>
+    </Popup>
+  )
+}
 
-    useEffect(() => {
-        fetchLeads();
-      }, []);
-
-    const fetchLeads = () => {
-        apiInstance.get("/leads")
-        .then((res) => {console.log(res);})
-        .catch((err) => {console.log(err);});
-    };
-
-    return (
-    <SalesLayout>
-        <h1>Lead Management</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone Number</th>
-              <th>Status</th>
-              <th> </th>
+function LeadTable({leads}){
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {leads.map((lead)=>{
+          return(
+            <tr style={{
+              boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
+            }}>
+              <td>{lead["FirstName"]}</td>
+              <td>{lead["LastName"]}</td>
+              <td>{lead["Number"]}</td>
+              <td>{lead["Success"] ? "Success" : "Following Up"}</td>
+              <td>Edit</td>
+              <td>
+              <InvitePopup></InvitePopup>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            
-              {leads.map((lead)=>{
-                return(
-                  <tr style={{
-                    boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
-                  }}>
-                    <td>{lead["FirstName"]}</td>
-                    <td>{lead["LastName"]}</td>
-                    <td>{lead["Number"]}</td>
-                    <td>{lead["Success"]}</td>
-                    <td>Edit</td>
-                    <td>
-                    <Popup trigger=
-                        {<button> Invite </button>}
-                        position="right center">
-                        <div>Invite Operations Manager to Create Project</div>
-                    </Popup>
-                    </td>
-                  </tr>
-                );
-              })}
-            
-          </tbody>
-        </table>
-    </SalesLayout>
-    );
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+const LeadManagement = () => {
+  const [leads, setLeads] = useState([]);
+
+  useEffect(() => {
+      fetchLeads();
+    }, []);
+
+  const fetchLeads = () => {
+      apiInstance.get("/leads")
+      .then((res) => setLeads(res.data))
+  };
+
+  return (
+  <SalesLayout>
+      <h1>Lead Management</h1>
+      <LeadTable leads={leads} />
+  </SalesLayout>
+  );
 };
 
 export default LeadManagement;

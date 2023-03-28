@@ -4,13 +4,6 @@ import apiInstance from "../utils/apiInstance";
 import {useEffect, useState} from 'react';
 import "./styles.scss"
 
-// dummy projects for visual purposes, need to use projects from the database
-const dummyProjects = [
-  {name: "Bob's Project", startDate: "2/15/2023", endDate: "4/14/2023", progress: "Installing", status: 60, billing: true},
-  {name: "Bobert's Project", startDate: "2/15/2023", endDate: "4/14/2023", progress: "Installing", status: 60, billing: false},
-];
-
-
 
 function ProjectTable({projects}){
   return (
@@ -28,7 +21,9 @@ function ProjectTable({projects}){
       <tbody>
         {projects.map((project)=>{
                 return(
-                  <tr>
+                  <tr style={{
+                    boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
+                  }}>
                     <td>{project["name"]}</td>
                     <td>{project["startDate"]}</td>
                     <td>{project["endDate"]}</td>
