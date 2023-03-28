@@ -15,5 +15,6 @@ const getCollectionFn = (collection) => {
 const users = getCollectionFn("users");
 const projects = getCollectionFn("projects");
 const leads = getCollectionFn("leads");
+const tasks = getCollectionFn("tasks");
 
-export { users, projects, leads };
+export { users, projects, leads, tasks };
