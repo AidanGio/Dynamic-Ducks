@@ -25,6 +25,9 @@ const SignInPage = () => {
       case "Operations Manager Portal":
         window.location.href = "/operationsmanagerportal";
         break;
+        case "Messages":
+        window.location.href = "/messages";
+        break;
       default:
         console.log("Invalid role selected.");
     }
@@ -53,6 +56,7 @@ const SignInPage = () => {
           <option value="Sales Portal">Sales Portal</option>
           <option value="Grounds Crew Portal">Grounds Crew Portal</option>
           <option value="Operations Manager Portal">Operations Manager Portal</option>
+          <option value="Messages">Messages</option>
         </select>
         <button>Submit</button>
       </form>
