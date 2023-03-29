@@ -9,6 +9,7 @@ import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
 
+import MessagePortal from "./pages/Messages";
 import "./App.scss";
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/clientportal" element={<ClientPortal />} />
           <Route path="/salesportal" element={<SalesPortal />} />
           <Route path="/groundscrewportal" element={<GroundsCrewPortal />} />
+          <Route path="/messages" element={<MessagePortal />} />
           <Route
             path="/operationsmanagerportal"
             element={<OperationsManagerPortal />}
