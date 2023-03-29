@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { apiInstance } from "../../utils/apiInstance";
 import TaskCard from "../TaskCard";
 import "./styles.scss";
 
 const Tasks = ({ data }) => {
-  console.log(data);
   return (
     <div className="tasks">
       {data == null || data.length == 0 ? (
@@ -23,6 +23,10 @@ const Tasks = ({ data }) => {
             })}
         </>
       )}
+
+      <button onClick={() => (window.location.href = "/tasks/create")}>
+        Create Task
+      </button>
     </div>
   );
 };

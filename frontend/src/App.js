@@ -9,6 +9,7 @@ import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 
 import "./App.scss";
+import CreateTaskPage from "./pages/CreateTaskPage";
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
           />
 
           <Route path="/tasks" element={<TaskManagement />} />
+          <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>
     </div>

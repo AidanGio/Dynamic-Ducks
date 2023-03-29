@@ -7,7 +7,6 @@ import {
   getTask,
   updateTask,
 } from "../data/tasks.js";
-import { updateTask } from "../tasks.js";
 
 const router = express.Router();
 
@@ -24,7 +23,7 @@ router.get("/", async (req, res) => {
 // Get all tasks under a single project
 router.get("/:id", async (req, res) => {
   try {
-    const result = await getTasks(req,res);
+    const result = await getTasks(req, res);
     res.json(result);
   } catch (error) {
     res.status(500).json(error);
@@ -32,19 +31,19 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get a task under a single project
-router.get("task/:id", async (req, res) => {
-    try {
-      const result = await getTask(req,res);
-      res.json(result);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  });
+router.get("/task/:id", async (req, res) => {
+  try {
+    const result = await getTask(req, res);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // Create a single task
-router.post("task/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    let result = await createTask(req,res);
+    let result = await createTask(req, res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
@@ -52,9 +51,9 @@ router.post("task/", async (req, res) => {
 });
 
 // Delete a task
-router.delete("task/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const result = await deleteTask(req,res);
+    const result = await deleteTask(req.params.id);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
@@ -62,9 +61,9 @@ router.delete("task/:id", async (req, res) => {
 });
 
 // Update a task
-router.patch("task/:id", async (req, res) => {
+router.patch("/task/:id", async (req, res) => {
   try {
-    const result = await updateTask(req,res);
+    const result = await updateTask(req, res);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);

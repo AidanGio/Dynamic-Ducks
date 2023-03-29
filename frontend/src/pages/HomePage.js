@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import apiInstance from "../utils/apiInstance";
 import MainLayout from "../layouts/MainLayout";
+import { apiInstance } from "../utils/apiInstance";
 
 import "./styles.scss";
 

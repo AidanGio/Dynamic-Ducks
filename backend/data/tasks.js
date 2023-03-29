@@ -22,15 +22,15 @@ const getTasks = async (req, res) => {
     console.log(error);
   }
 
-  const {id} = req.params
- 
+  const { id } = req.params;
+
   const query = { _id: new ObjectId(id) };
 
   try {
     const allTasks = await tasksCollection.find(query).toArray();
     return allTasks;
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
 };
 
@@ -43,20 +43,20 @@ const getTask = async (req, res) => {
     console.log(error);
   }
 
-  const {id} = req.params
- 
+  const { id } = req.params;
+
   const query = { _id: new ObjectId(id) };
 
   try {
     const atask = await tasksCollection.find(query);
     return atask;
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
 };
 
 // Create a task
-const createTask = async (req,res) => {
+const createTask = async (req, res) => {
   let tasksCollection;
   try {
     tasksCollection = await tasks();
@@ -73,7 +73,7 @@ const createTask = async (req,res) => {
 };
 
 // Delete a task
-const deleteTask = async (req,res) => {
+const deleteTask = async (req, res) => {
   let tasksCollection;
   try {
     tasksCollection = await tasks();
@@ -81,10 +81,10 @@ const deleteTask = async (req,res) => {
     console.log(error);
   }
 
-  const {id} = req.params
+  const { id } = req.params;
   const query = { _id: new ObjectId(id) };
 
-  const result = await tasksCollection.deleteOne(query)
+  const result = await tasksCollection.deleteOne(query);
 
   if (deleteResult.deletedCount == 1) {
     console.log(`Successfully deleted one task with ID ${id}`);
@@ -96,7 +96,7 @@ const deleteTask = async (req,res) => {
 };
 
 // Update a task
-const updateTask = async (req,res) => {
+const updateTask = async (req, res) => {
   let tasksCollection;
   try {
     tasksCollection = await tasks();
@@ -104,23 +104,15 @@ const updateTask = async (req,res) => {
     console.log(error);
   }
 
-  const {id} = req.params
+  const { id } = req.params;
   const query = { _id: new ObjectId(id) };
   const update = { $set: req.body };
 
   try {
-    const result = await tasksCollection.updateOne(query,update)
+    const result = await tasksCollection.updateOne(query, update);
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
 };
 
-
-export {
-  getAllTasks,
-  deleteTask,
-  createTask,
-  updateTask,
-  getTasks,
-  getTask,
-};
+export { getAllTasks, deleteTask, createTask, updateTask, getTasks, getTask };
