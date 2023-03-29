@@ -17,6 +17,8 @@ function InvitePopup() {
       <div style={{
         backgroundColor: "white",
         padding: "15px",
+        boxShadow: "2px 2px 2px grey",
+        borderRadius: "15px",
       }}>
         <div>Invite Operations Manager to Create Project</div>
         
@@ -50,6 +52,7 @@ function LeadTable({leads}){
               <td>
               <InvitePopup></InvitePopup>
               </td>
+              <td style={{color: "red"}}>Delete</td>
             </tr>
           );
         })}
