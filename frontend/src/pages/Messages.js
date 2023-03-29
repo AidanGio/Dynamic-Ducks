@@ -1,5 +1,5 @@
 import React from "react";
-import OperationsManagerLayout from "../layouts/OperationsManagerLayout";
+import MessagesLayout from "../layouts/MessagesLayout";
 
 const Messages = [
   {
@@ -130,12 +130,12 @@ function MessageTable({ messages }) {
 
 const MessagePortal = () => {
   return (
-    <OperationsManagerLayout>
+    <MessagesLayout>
       <h1>Message Thread</h1>
       <div>
         <MessageTable messages={Messages} />
       </div>
-    </OperationsManagerLayout>
+    </MessagesLayout>
   );
 };
 

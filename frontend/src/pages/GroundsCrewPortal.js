@@ -50,7 +50,7 @@ function ProjectTable({projects, active}){
   );
 };
 
-const GroundCrewPortal = () => {
+const GroundsCrewPortal = () => {
   return (
   <GroundCrewLayout>
     <h1>Ground Crew Portal</h1>
