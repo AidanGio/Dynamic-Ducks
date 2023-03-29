@@ -7,6 +7,8 @@ import SalesPortal from "./pages/SalesPortal";
 import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
+import LeadManagement from "./pages/LeadManagement";
+
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
 function App() {
@@ -27,6 +29,7 @@ function App() {
           />
 
           <Route path="/tasks" element={<TaskManagement />} />
+          <Route path="/leadmanagement" element={<LeadManagement />} />
         </Routes>
       </BrowserRouter>
     </div>
