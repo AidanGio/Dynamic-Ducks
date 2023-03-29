@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import apiInstance from "../utils/apiInstance";
 import Popup from "reactjs-popup";
 import SalesLayout from "../layouts/SalesLayout";
+import { apiInstance } from "../utils/apiInstance";
 import "./styles.scss";
 
 function CreateLeadButton() {
