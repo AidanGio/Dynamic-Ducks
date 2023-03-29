@@ -7,7 +7,9 @@ import SalesPortal from "./pages/SalesPortal";
 import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
+import LeadManagement from "./pages/LeadManagement";
 
+import MessagePortal from "./pages/Messages";
 import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
 function App() {
@@ -21,12 +23,14 @@ function App() {
           <Route path="/clientportal" element={<ClientPortal />} />
           <Route path="/salesportal" element={<SalesPortal />} />
           <Route path="/groundscrewportal" element={<GroundsCrewPortal />} />
+          <Route path="/messages" element={<MessagePortal />} />
           <Route
             path="/operationsmanagerportal"
             element={<OperationsManagerPortal />}
           />
 
           <Route path="/tasks" element={<TaskManagement />} />
+          <Route path="/leadmanagement" element={<LeadManagement />} />
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>
