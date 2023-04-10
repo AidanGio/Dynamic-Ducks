@@ -63,9 +63,9 @@ router.route("/login").post(async (req, res) => {
 
     const result = await userLogin({ email, password });
 
-    req.session.user = {
-      ...result,
-    };
+    // req.session.user = {
+    //   ...result,
+    // };
 
     res.status(200).json(result);
   } catch (error) {

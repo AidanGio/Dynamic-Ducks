@@ -11,7 +11,11 @@ const createUser = async (obj) => {
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
     throw { status: 400, msg: "Could not add users" };
 
-  return await getUserById(insertInfo.insertedId);
+  const user = await getUserById(insertInfo.insertedId);
+
+  delete user.password;
+
+  return user;
 };
 
 const userLogin = async ({ email, password }) => {

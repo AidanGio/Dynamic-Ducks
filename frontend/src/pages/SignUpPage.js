@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { apiInstance } from "../utils/apiInstance";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
-  const [role, setRole] = useState();
+  const [role, setRole] = useState("client");
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
 
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [error, setError] = useState({ error: false });
+
+  const navigate = useNavigate();
+
+  console.log(role);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -29,8 +34,7 @@ const SignUpPage = () => {
         const { data } = await apiInstance.post("/users/register", {
           ...newUser,
         });
-
-        console.log(data);
+        navigate("/login");
       } else {
         throw { message: "Password mismatch" };
       }
@@ -52,8 +56,14 @@ const SignUpPage = () => {
           type={"text"}
           onChange={(e) => setLastName(e.target.value)}
         />
-        <select placeholder="Role" onChange={(e) => setRole(e.target.value)}>
-          <option value={"customer"}>Customer</option>
+        <select
+          placeholder="Role"
+          onChange={(e) => {
+            setRole(e.target.value);
+          }}
+          value={role}
+        >
+          <option value={"client"}>Client</option>
           <option value={"operationsManager"}>Operations Manager</option>
           <option value={"salesRepresentative"}> Sales Representative</option>
           <option value={"installationWorker"}>Installation Worker</option>

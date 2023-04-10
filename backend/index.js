@@ -7,15 +7,15 @@ import cors from "cors";
 
 const app = express();
 
-app.use(
-  session({
-    name: "AuthCookie",
-    secret: "DynmaicDucks",
-    saveUninitialized: false,
-    resave: false,
-    cookie: { maxAge: 6000000 },
-  })
-);
+// app.use(
+//   session({
+//     name: "AuthCookie",
+//     secret: "DynmaicDucks",
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: { maxAge: 6000000 },
+//   })
+// );
 
 app.use(json());
 
