@@ -8,7 +8,6 @@ import {
     updateLead
   } from "../data/leads.js";
 
-
 const router = express.Router();
 
 // get all leads
