@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -12,21 +12,84 @@ import LeadManagement from "./pages/LeadManagement";
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
+import { useEffect, useState } from "react";
 function App() {
+  const [auth, setAuth] = useState(JSON.parse(sessionStorage.getItem("user")));
+
+  // useEffect(() => {
+  //   setAuth(JSON.parse(sessionStorage.getItem("user")));
+  // }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/clientportal" element={<ClientPortal />} />
-          <Route path="/salesportal" element={<SalesPortal />} />
-          <Route path="/groundscrewportal" element={<GroundsCrewPortal />} />
+          <Route
+            path="/"
+            element={
+              auth ? (
+                <HomePage auth={auth} setAuth={setAuth} />
+              ) : (
+                <Navigate to={"/login"} />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={!auth ? <SignUpPage /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/login"
+            element={
+              !auth ? (
+                <SignInPage setAuth={setAuth} auth={auth} />
+              ) : (
+                <Navigate replace to={"/"} />
+              )
+            }
+            setAuth={setAuth}
+          />
+
+          <Route
+            path="/clientportal"
+            element={
+              auth?.role == "client" ? (
+                <ClientPortal />
+              ) : (
+                <Navigate replace to={"/"} />
+              )
+            }
+          />
+          <Route
+            path="/salesportal"
+            element={
+              auth?.role == "sales" ? (
+                <SalesPortal />
+              ) : (
+                <Navigate replace to={"/"} />
+              )
+            }
+          />
+          <Route
+            path="/crew"
+            element={
+              auth?.role == "installationWorker" ? (
+                <GroundsCrewPortal />
+              ) : (
+                <Navigate replace to={"/"} />
+              )
+            }
+          />
           <Route path="/messages" element={<MessagePortal />} />
           <Route
             path="/operationsmanagerportal"
-            element={<OperationsManagerPortal />}
+            element={
+              auth && auth.role == "operationsManager" ? (
+                <OperationsManagerPortal />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
           />
 
           <Route path="/tasks" element={<TaskManagement />} />

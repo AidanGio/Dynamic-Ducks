@@ -3,28 +3,34 @@ import MainLayout from "../layouts/MainLayout";
 import { apiInstance } from "../utils/apiInstance";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/solar.png";
+import { useNavigate } from "react-router-dom";
 
-const SignInPage = () => {
+const SignInPage = ({ setAuth, auth }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   // const [role, setRole] = useState("Client Portal");
+  const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
-    try {
-      const data = await apiInstance.post("/users/login",  {
+    await apiInstance
+      .post("/users/login", {
         email,
         password,
-        
-      });
+      })
+      .then((res) => {
+        sessionStorage.setItem("user", JSON.stringify(res.data));
+        setAuth(JSON.parse(sessionStorage.getItem("user")));
 
-      console.log(data);
-    } catch (error) {
-      setError({ error: true, message: error.message });
-    }
+        navigate("/");
+      })
+      .catch((e) => {
+        setError(e);
+        console.log(e);
+      });
 
     // switch (role) {
     //   case "Client Portal":
