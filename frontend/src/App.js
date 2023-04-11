@@ -12,6 +12,7 @@ import LeadManagement from "./pages/LeadManagement";
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
+import EditLeadPage from "./pages/EditLeadPage";
 function App() {
   return (
     <div className="App">
@@ -30,7 +31,8 @@ function App() {
           />
 
           <Route path="/tasks" element={<TaskManagement />} />
-          <Route path="/leadmanagement" element={<LeadManagement />} />
+          <Route path="/leads" element={<LeadManagement />} />
+          <Route path="/leads/edit" element={<EditLeadPage />} />
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>
