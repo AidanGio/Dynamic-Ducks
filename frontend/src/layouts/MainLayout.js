@@ -2,11 +2,11 @@ import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const MainLayout = (props) => {
+const MainLayout = ({ children, auth }) => {
   return (
     <>
-      <Header title={'Dynamic Ducks'} />
-      <main>{props.children}</main>
+      <Header auth={auth} title={"Dynamic Ducks"} />
+      <main>{children}</main>
 
       <Footer />
     </>
