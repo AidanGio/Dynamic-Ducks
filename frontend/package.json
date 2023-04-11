@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fullcalendar/daygrid": "^6.1.5",
+    "@fullcalendar/react": "^6.1.5",
     "@mui/material": "^5.11.16",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
