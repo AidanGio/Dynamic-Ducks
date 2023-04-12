@@ -1,16 +1,27 @@
-const express = require("express");
-const router = express.Router();
-const homeController = require("../controllers/home");
-const uploadController = require("../controllers/upload");
+const util = require("util");
+const multer = require("multer");
+const { GridFsStorage } = require("multer-gridfs-storage");
+const dbConfig = require("../config/db");
 
-let routes = app => {
-  router.get("/", homeController.getHome);
+var storage = new GridFsStorage({
+  url: dbConfig.url + dbConfig.database,
+  options: { useNewUrlParser: true, useUnifiedTopology: true },
+  file: (req, file) => {
+    const match = ["image/png", "image/jpeg"];
 
-  router.post("/upload", uploadController.uploadFiles);
-  router.get("/files", uploadController.getListFiles);
-  router.get("/files/:name", uploadController.download);
+    if (match.indexOf(file.mimetype) === -1) {
+      const filename = `${Date.now()}-bezkoder-${file.originalname}`;
+      return filename;
+    }
 
-  return app.use("/", router);
-};
+    return {
+      bucketName: dbConfig.imgBucket,
+      filename: `${Date.now()}-bezkoder-${file.originalname}`
+    };
+  }
+});
 
-module.exports = routes;
+var uploadFiles = multer({ storage: storage }).array("file", 10);
+// var uploadFiles = multer({ storage: storage }).single("file");
+var uploadFilesMiddleware = util.promisify(uploadFiles);
+module.exports = uploadFilesMiddleware;
