@@ -2,6 +2,8 @@ import React from "react";
 
 import logo from "./../../assets/images/solar.png";
 import "./styles.scss";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = ({
   openTasks,
@@ -9,11 +11,13 @@ const SideBar = ({
   setOpenTasks,
   setOpenDashboard,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <img alt="Logo" src={logo} />
       <div className="btn-grp">
-        <button
+        <Button
+          variant={"contained"}
           className={openDashboard ? "active" : ""}
           onClick={() => {
             setOpenDashboard(true);
@@ -21,8 +25,9 @@ const SideBar = ({
           }}
         >
           Dashboard
-        </button>
-        <button
+        </Button>
+        <Button
+          variant={"contained"}
           className={openTasks ? "active" : ""}
           onClick={() => {
             setOpenDashboard(false);
@@ -30,7 +35,9 @@ const SideBar = ({
           }}
         >
           Tasks
-        </button>
+        </Button>
+
+        <Button onClick={() => navigate("/")}>Home</Button>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ function App() {
             path="/clientportal"
             element={
               auth?.role == "client" ? (
-                <ClientPortal />
+                <ClientPortal auth={auth} />
               ) : (
                 <Navigate replace to={"/"} />
               )
@@ -66,7 +66,7 @@ function App() {
             path="/salesportal"
             element={
               auth?.role == "sales" ? (
-                <SalesPortal />
+                <SalesPortal auth={auth} />
               ) : (
                 <Navigate replace to={"/"} />
               )
@@ -76,25 +76,35 @@ function App() {
             path="/crew"
             element={
               auth?.role == "installationWorker" ? (
-                <GroundsCrewPortal />
+                <GroundsCrewPortal auth={auth} />
               ) : (
                 <Navigate replace to={"/"} />
               )
             }
           />
-          <Route path="/messages" element={<MessagePortal />} />
+          <Route path="/messages" element={<MessagePortal auth={auth} />} />
           <Route
             path="/operationsmanagerportal"
             element={
               auth && auth.role == "operationsManager" ? (
-                <OperationsManagerPortal />
+                <OperationsManagerPortal auth={auth} />
               ) : (
                 <Navigate to={"/"} />
               )
             }
           />
 
-          <Route path="/tasks" element={<TaskManagement />} />
+          <Route
+            path="/tasks"
+            element={
+              auth?.role == "installationWorker" ||
+              auth?.role == "operationsManager" ? (
+                <TaskManagement />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
           <Route path="/leads" element={<LeadManagement />} />
           <Route path="/leads/edit" element={<EditLeadPage />} />
           <Route path="/tasks/create" element={<CreateTaskPage />} />

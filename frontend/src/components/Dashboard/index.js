@@ -24,12 +24,13 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" events={calendarEvents} />
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={calendarEvents}
+      />
     </div>
   );
 };
 
-
-
 export default Dashboard;
-
