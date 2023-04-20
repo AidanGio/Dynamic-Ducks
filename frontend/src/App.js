@@ -8,6 +8,8 @@ import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
+import ProjectManagement from "./pages/ProjectManagement";
+import CreateProjectPage from "./pages/CreateProjectPage"
 
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
@@ -28,7 +30,8 @@ function App() {
             path="/operationsmanagerportal"
             element={<OperationsManagerPortal />}
           />
-
+          <Route path="/projects" element={<ProjectManagement/>}/>
+          <Route path="/projects/createProject" element={<CreateProjectPage/>}/>
           <Route path="/tasks" element={<TaskManagement />} />
           <Route path="/leadmanagement" element={<LeadManagement />} />
           <Route path="/tasks/create" element={<CreateTaskPage />} />
