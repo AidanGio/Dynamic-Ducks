@@ -47,7 +47,18 @@ const CreateProjectPage = () => {
             name, 
             startDate, 
             endDate, 
-            AssignedManagers: selectedManagers
+            Progress: "Initializing",
+            Status: 1,
+            billingStatus: false,
+            permitStatus: "permit",
+            laborHours: 0,
+            materialDetails: "materialDetails",
+            solarSystemInfo: "solarSystemInfo",
+            inspectionInfo: "inspectionInfo",
+            closeOutInfo: "closeOutInfo",
+            AssignedManagers: selectedManagers,
+            AssignedCustomers: selectedCustomers,
+            AssignedWorkers: selectedWorkers
         }
 
         const response = await fetch('http://localhost:5000/projects', {
@@ -68,6 +79,8 @@ const CreateProjectPage = () => {
             setStartDate('')
             setEndDate('')
             setSelectedManagers([])
+            setSelectedWorkers([])
+            setSelectedCustomers([])
             setError(null)
             console.log('new project created')
         }
@@ -138,7 +151,7 @@ const CreateProjectPage = () => {
                 </select>
 
                 <label>Assigned Customer(s)</label>
-                <select multiple onChange={(e) => setSelectedManagers(Array.from(e.target.selectedOptions, option => option.value))}>
+                <select multiple onChange={(e) => setSelectedCustomers(Array.from(e.target.selectedOptions, option => option.value))}>
                     {customers.map(customer => (
                         <option key={customer._id} value={customer._id}>{customer.firstName} {customer.lastName}</option>
                     ))}
