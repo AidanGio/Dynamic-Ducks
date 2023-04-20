@@ -26,7 +26,7 @@ const SignInPage = ({ setAuth, auth }) => {
         if (res.data.role) {
           sessionStorage.setItem("user", JSON.stringify(res.data));
           setAuth(JSON.parse(sessionStorage.getItem("user")));
-
+          console.log(JSON.parse(sessionStorage.getItem("user")));
           navigate("/");
         }
       })

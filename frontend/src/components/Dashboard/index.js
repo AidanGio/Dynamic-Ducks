@@ -5,9 +5,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 
 const Dashboard = () => {
   const [calendarEvents, setCalendarEvents] = useState([]);
-
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const userId = user._id; // get the _id of the logged-in user
+  console.log(userId);
   useEffect(() => {
-    fetch("http://localhost:5001/calendar/6407f77988b55420b2f3476c")
+    fetch(`http://localhost:5000/calendar/${userId}`)
       .then((response) => response.json())
       .then((data) => {
         const events = data.map((event) => ({
@@ -20,17 +22,19 @@ const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [userId]); // add userId as a dependency to useEffect
 
   return (
     <div className="dashboard">
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        events={calendarEvents}
+      <FullCalendar 
+      plugins={[dayGridPlugin]} 
+      initialView="dayGridMonth" 
+      events={calendarEvents} 
+      timeZone="America/New_York" 
       />
     </div>
   );
 };
 
 export default Dashboard;
+
