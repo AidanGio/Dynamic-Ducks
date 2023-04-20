@@ -22,6 +22,8 @@ const SignUpPage = () => {
 
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [securityQuestion, setSecurityQuestion] = useState();
+  const [securityAnswer, setSecurityAnswer] = useState();
   const [error, setError] = useState({ error: false });
 
   const navigate = useNavigate();
@@ -37,6 +39,8 @@ const SignUpPage = () => {
       email,
       phoneNumber,
       password,
+      securityQuestion,
+      securityAnswer,
     };
 
     try {
@@ -105,6 +109,31 @@ const SignUpPage = () => {
           placeholder="Confirm Password"
           type={"password"}
           onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+	      <FormControl fullWidth>
+          <InputLabel id="securityQ-label">Security Question</InputLabel>
+          <Select
+            labelId="securityQ-label"
+            id="securityQ"
+            placeholder="SecurityQuestion"
+            onChange={(e) => {
+              setSecurityQuestion(e.target.value);
+            }}
+            value={role}
+          >
+            <MenuItem value={"client"}>What was your childhood nickname?</MenuItem>
+            <MenuItem value={"Q2"}>What street did you live on in third grade?</MenuItem>
+            <MenuItem value={"Q3"}>What is your oldest sibling's middle name?</MenuItem>
+            <MenuItem value={"Q4"}>What school did you attend for sixth grade?</MenuItem>
+	          <MenuItem value={"Q5"}>What was the last name of your third grade teacher?</MenuItem>
+            <MenuItem value={"Q6"}>In what city or town was your first job?</MenuItem>a
+            <MenuItem value={"Q7"}>What is your maternal grandmother's maiden name?</MenuItem>
+          </Select>
+        </FormControl>
+        <Input
+          placeholder="Answer"
+          type={"text"}
+          onChange={(e) => setSecurityAnswer(e.target.value)}
         />
         <Button type="submit" variant={"contained"}>
           Submit
