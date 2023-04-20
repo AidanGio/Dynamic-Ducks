@@ -4,101 +4,31 @@ import { apiInstance } from "../utils/apiInstance";
 
 import "./styles.scss";
 
-const dummyProjects = [
-    {
-      name: "Bob's Project",
-      startDate: "2/15/2023",
-      endDate: "4/14/2023",
-      progress: "Installing",
-      status: 60,
-      billing: true,
-    },
-    {
-      name: "Bobert's Project",
-      startDate: "2/15/2023",
-      endDate: "4/14/2023",
-      progress: "Installing",
-      status: 60,
-      billing: false,
-    },
-  ];
-
-  function ProjectRow({ project }) {
-    return (
-      <tr
-        style={{
-          boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
-        }}
-      >
-        <td>{project.name}</td>
-        <td>{project.startDate}</td>
-        <td>{project.endDate}</td>
-        <td>{project.progress}</td>
-        <td>{project.status}</td>
-        <td>{project.billing ? "Complete" : "Incomplete"}</td>
-      </tr>
-    );
-  }
-
-
-  function ProjectTable({ projects, active }) {
-    const rows = [];
-  
-    function stringToDate(date) {
-      const dateArray = date.split("/");
-      return new Date(dateArray[2], dateArray[0] - 1, dateArray[1]);
-    }
-  
-    // Need to filter projects so that the table will either only have current projects or past projects
-    // Tried doing it this way but it makes it so that the entire page disappears...
-    projects.forEach((project) => {
-      //if ((active && project.endDate.stringToDate().getTime() < new Date.getTime()) || (!active && project.endDate.stringToDate().getTime() > new Date.getTime())){
-      rows.push(<ProjectRow project={project} />);
-      //}
-    });
-  
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Progress</th>
-            <th>Project Status</th>
-            <th>Billing Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => {
-            return (
-              <tr
-                style={{
-                  boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
-                }}
-              >
-                <td>{project["name"]}</td>
-                <td>{project["startDate"]}</td>
-                <td>{project["endDate"]}</td>
-                <td>{project["progress"]}</td>
-                <td>{project["status"] * 20 + "%"}</td>
-                <td>
-                  {project["billingStatus"] ? "Payment Received" : "Pending"}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  }
+// components
+import ProjectDetails from '../components/ProjectsDetails'
 
 const ProjectManagement = () => {
+    const [projects, setProjects] = useState([])
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            const response = await fetch('http://localhost:5000/projects')
+            const json = await response.json()
+            if (response.ok) {
+                setProjects(json)
+            }
+        }
+    
+        fetchProjects()
+    }, [])
+
     return (
         <ProjectsLayout>
             <h1>Projects</h1>
             <div>
-                <ProjectTable projects={dummyProjects} />
+            {projects && projects.map((project) => (
+                    <ProjectDetails key={project._id} project={project} />
+                ))}
             </div>
         </ProjectsLayout>
     )
