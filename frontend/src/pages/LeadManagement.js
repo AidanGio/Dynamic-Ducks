@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-import SalesLayout from "../layouts/SalesLayout";
+import { Link, useNavigate } from "react-router-dom";
 import { apiInstance } from "../utils/apiInstance";
 import "./styles.scss";
-
-function CreateLeadButton() {
-  return <button>Create New Lead</button>;
-}
+import MainLayout from "../layouts/MainLayout";
 
 function InvitePopup() {
   return (
@@ -25,7 +22,31 @@ function InvitePopup() {
   );
 }
 
+function EditButton(lead) {
+  const navigate = useNavigate();
+
+  const toEditLeadPage = () => {
+    navigate("/leads/edit", { state: lead });
+  };
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          toEditLeadPage();
+        }}
+      >
+        Edit
+      </button>
+    </div>
+  );
+}
+
 function LeadTable({ leads }) {
+  const deleteLead = () => {
+    apiInstance.delete();
+  };
+
   return (
     <table>
       <thead>
@@ -34,6 +55,7 @@ function LeadTable({ leads }) {
           <th>Last Name</th>
           <th>Phone Number</th>
           <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -48,7 +70,9 @@ function LeadTable({ leads }) {
               <td>{lead["LastName"]}</td>
               <td>{lead["Number"]}</td>
               <td>{lead["Success"] ? "Success" : "Following Up"}</td>
-              <td>Edit</td>
+              <td>
+                <EditButton></EditButton>
+              </td>
               <td>
                 <InvitePopup></InvitePopup>
               </td>
@@ -73,10 +97,10 @@ const LeadManagement = () => {
   };
 
   return (
-    <SalesLayout>
+    <MainLayout>
       <h1>Lead Management</h1>
       <LeadTable leads={leads} />
-    </SalesLayout>
+    </MainLayout>
   );
 };
 

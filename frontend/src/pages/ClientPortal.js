@@ -1,8 +1,8 @@
 import React from "react";
-import ClientLayout from "../layouts/ClientLayout";
+import MainLayout from "../layouts/MainLayout";
 
-const ClientPortal = () => {
-  return <ClientLayout>ClientPortal</ClientLayout>;
+const ClientPortal = ({ auth }) => {
+  return <MainLayout auth={auth}>ClientPortal</MainLayout>;
 };
 
 export default ClientPortal;

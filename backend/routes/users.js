@@ -4,7 +4,10 @@ import {
   deleteUser,
   getAllUsers,
   getUserById,
+  userLogin,
 } from "../data/users.js";
+
+import bcrypt from "bcrypt";
 
 // let User = require("../models/user.model");
 
@@ -15,20 +18,59 @@ router.route("/").get(async (req, res) => {
   res.json(result);
 });
 
-router.route("/").post(async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+router.route("/register").post(async (req, res) => {
+  try {
+    // let firstName = req.body.firstName;
+    // let lastName = req.body.lastName;
+    // let address = req.body.address;
+    // let role = req.body.role;
 
-  const newUser = {
-    firstName,
-    lastName,
-    address,
-    role,
-  };
+    // if (!firstName || !lastName || !address || !role) {
+    //   throw { status: 400, message: "BAD PARAMETER" };
+    // }
 
-  const result = await createUser(newUser);
+    // const newUser = {
+    //   firstName,
+    //   lastName,
+    //   address,
+    //   role,
+    // };
 
-  res.json(result);
+    let password = req.body.password;
+
+    const salt = await bcrypt.genSalt(10);
+
+    let hashpass = await bcrypt.hash(password, salt);
+
+    req.body.password = hashpass;
+
+    const result = await createUser(req.body);
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(error.status).json(error.message);
+  }
+});
+
+router.route("/login").post(async (req, res) => {
+  try {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    // if (!email || !password) {
+    //   throw { status: 400, message: "BAD PARAMETER" };
+    // }
+
+    const result = await userLogin({ email, password });
+
+    // req.session.user = {
+    //   ...result,
+    // };
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(error.status).json(error.message);
+  }
 });
 
 router.route("/:id").get(async (req, res) => {

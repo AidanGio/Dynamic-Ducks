@@ -1,5 +1,5 @@
 import React from "react";
-import MessagesLayout from "../layouts/MessagesLayout";
+import MainLayout from "../layouts/MainLayout";
 
 const Messages = [
   {
@@ -128,14 +128,14 @@ function MessageTable({ messages }) {
   );
 }
 
-const MessagePortal = () => {
+const MessagePortal = ({ auth }) => {
   return (
-    <MessagesLayout>
+    <MainLayout auth={auth}>
       <h1>Message Thread</h1>
       <div>
         <MessageTable messages={Messages} />
       </div>
-    </MessagesLayout>
+    </MainLayout>
   );
 };
 
