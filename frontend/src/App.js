@@ -96,8 +96,8 @@ function App() {
               )
             }
           />
-
-          <Route path="/projects" element={<ProjectManagement/>}/>
+          
+          <Route path="/projects" element={<ProjectManagement auth={auth} />}/>
           <Route path="/projects/createProject" element={<CreateProjectPage/>}/>
           <Route path="/projects/:projectId/edit" element={<ProjectInfo/>}/>
           <Route path="/tasks" element={<TaskManagement />} />

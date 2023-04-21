@@ -5,6 +5,7 @@ import {
   getAllProjects,
   getProject,
   updateProject,
+  getUserProjects
 } from "../data/projects.js";
 
 const router = express.Router();
@@ -23,6 +24,16 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const result = await getProject(req,res);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// Get all projects for a user
+router.get("/user/:id", async (req, res) => {
+  try {
+    const result = await getUserProjects(req,res);
     res.json(result);
   } catch (error) {
     res.status(500).json(error);
