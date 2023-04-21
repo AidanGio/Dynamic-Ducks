@@ -66,6 +66,16 @@ const Header = ({ title, auth }) => {
             Chat
           </NavLink>
         )}
+        {auth && (
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "activeStyle" : "inactiveStyle"
+            }
+            to={"/projects"}
+          >
+            Projects
+          </NavLink>
+        )}
       </div>
     </header>
   );
