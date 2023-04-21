@@ -8,6 +8,9 @@ import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
+import ProjectManagement from "./pages/ProjectManagement";
+import CreateProjectPage from "./pages/CreateProjectPage"
+import ProjectInfo from "./pages/ProjectInfo"
 
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
@@ -93,6 +96,12 @@ function App() {
               )
             }
           />
+
+          <Route path="/projects" element={<ProjectManagement/>}/>
+          <Route path="/projects/createProject" element={<CreateProjectPage/>}/>
+          <Route path="/projects/:projectId/edit" element={<ProjectInfo/>}/>
+          <Route path="/tasks" element={<TaskManagement />} />
+          <Route path="/leadmanagement" element={<LeadManagement />} />
 
           <Route
             path="/tasks"
