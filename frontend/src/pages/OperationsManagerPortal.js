@@ -130,9 +130,9 @@ function ProjectTable({ projects, active }) {
   );
 }
 
-const OperationsManagerPortal = () => {
+const OperationsManagerPortal = ({ auth }) => {
   return (
-    <MainLayout>
+    <MainLayout auth={auth}>
       <h1>Operations Manager Portal</h1>
       <div>
         <h2>Current Projects</h2>

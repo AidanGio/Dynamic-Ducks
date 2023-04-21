@@ -24,7 +24,7 @@ const HomePage = ({ auth, setAuth }) => {
           Client Portal
         </Button>
       )}{" "}
-      {auth && auth.role == "operationsmanagerportal" && (
+      {auth && auth.role == "operationsManager" && (
         <Button
           variant={"contained"}
           onClick={() => navigate("/operationsmanagerportal")}
