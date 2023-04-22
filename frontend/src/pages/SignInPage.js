@@ -4,6 +4,7 @@ import { apiInstance } from "../utils/apiInstance";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/solar.png";
 import { useNavigate } from "react-router-dom";
+import { Button, Input } from "@mui/material";
 
 const SignInPage = ({ setAuth, auth }) => {
   const [email, setEmail] = useState();
@@ -22,10 +23,12 @@ const SignInPage = ({ setAuth, auth }) => {
         password,
       })
       .then((res) => {
-        sessionStorage.setItem("user", JSON.stringify(res.data));
-        setAuth(JSON.parse(sessionStorage.getItem("user")));
-
-        navigate("/");
+        if (res.data.role) {
+          sessionStorage.setItem("user", JSON.stringify(res.data));
+          setAuth(JSON.parse(sessionStorage.getItem("user")));
+          console.log(JSON.parse(sessionStorage.getItem("user")));
+          navigate("/");
+        }
       })
       .catch((e) => {
         setError(e);
@@ -55,30 +58,46 @@ const SignInPage = ({ setAuth, auth }) => {
 
   return (
     <MainLayout>
-      <div style={{  width:"100vw" , height:"90vh" , padding:"0", margin:"0", display:"flex" , alignItems:"center" , justifyContent:"center"}}>
-        <div style={{ width:"50%" , height:"100%" , background:"linear-gradient(to bottom right, #f4afab, #f4eea9)" }}>
-          <image src={logo} height={"100%"}/>
-        </div>
-        <div style={{ width:"50%" , height:"100%" , paddingTop:"50vh" }}>
-          <h1>SIGN IN</h1>
-          <form style={{ paddingLeft:"17.5vw" }} onSubmit={(e) => submit(e)}>
-          <h4 style={{ textAlign:"left" , paddingLeft:"10px" }}>Email</h4>
-          <input
+      {/* <div
+          style={{
+            width: "50%",
+            height: "100%",
+            background: "linear-gradient(to bottom right, #f4afab, #f4eea9)",
+          }}
+        >
+          <image src={logo} height={"100%"} />
+        </div> */}
+      <div
+        className="signin"
+        // style={{ width: "50%", height: "100%", paddingTop: "50vh" }}
+      >
+        <h1>SIGN IN</h1>
+        <form
+          // style={{ paddingLeft: "17.5vw" }}
+          onSubmit={(e) => submit(e)}
+        >
+          <Input
             placeholder="Email Address"
             type={"email"}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <h4 style={{ textAlign:"left" , paddingLeft:"10px" }}>Password</h4>
-          <input
+          <Input
             placeholder="Password"
             type={"password"}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Link to={"./ForgotPassword.js"} style={{ textDecoration:"none" , textAlign:"right" , 
-              paddingRight:"10px" , color:"black"}}>
+          <Link
+            to={"./ForgotPassword.js"}
+            style={{
+              textDecoration: "none",
+              textAlign: "right",
+              paddingRight: "10px",
+              color: "black",
+            }}
+          >
             Forgot Password?
           </Link>
-            {/* <select
+          {/* <select
               className="role-dropdown"
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -91,10 +110,18 @@ const SignInPage = ({ setAuth, auth }) => {
               </option>
               <option value="Messages">Messages</option>
             </select> */}
-          <button style={{ backgroundImage:"linear-gradient(to right, #fdbf61, #f4eea9)" ,   
-          color:"black", border:"1px solid black" , }}>Sign In</button>
-          </form>
-        </div>
+          <Button
+            type="submit"
+            variant={"contained"}
+            // style={{
+            //   backgroundImage: "linear-gradient(to right, #fdbf61, #f4eea9)",
+            //   color: "black",
+            //   border: "1px solid black",
+            // }}
+          >
+            Sign In
+          </Button>
+        </form>
       </div>
     </MainLayout>
   );

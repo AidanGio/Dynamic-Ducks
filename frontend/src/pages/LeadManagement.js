@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import { Link, useNavigate } from "react-router-dom";
-import SalesLayout from "../layouts/SalesLayout";
 import { apiInstance } from "../utils/apiInstance";
 import "./styles.scss";
-
+import MainLayout from "../layouts/MainLayout";
 
 function InvitePopup() {
   return (
@@ -18,31 +17,35 @@ function InvitePopup() {
         }}
       >
         <div>Invite Operations Manager to Create Project</div>
-
       </div>
     </Popup>
   );
 }
 
-function EditButton (lead){
+function EditButton(lead) {
   const navigate = useNavigate();
 
   const toEditLeadPage = () => {
-    navigate("/leads/edit", {state: lead});
-  }
+    navigate("/leads/edit", { state: lead });
+  };
 
   return (
     <div>
-      <button onClick={() => {toEditLeadPage()}}>Edit</button>
+      <button
+        onClick={() => {
+          toEditLeadPage();
+        }}
+      >
+        Edit
+      </button>
     </div>
   );
 }
 
 function LeadTable({ leads }) {
-
   const deleteLead = () => {
-    apiInstance.delete()
-  }
+    apiInstance.delete();
+  };
 
   return (
     <table>
@@ -94,10 +97,10 @@ const LeadManagement = () => {
   };
 
   return (
-    <SalesLayout>
+    <MainLayout>
       <h1>Lead Management</h1>
       <LeadTable leads={leads} />
-    </SalesLayout>
+    </MainLayout>
   );
 };
 

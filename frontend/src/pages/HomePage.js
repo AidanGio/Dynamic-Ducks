@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { apiInstance } from "../utils/apiInstance";
 
 import "./styles.scss";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = ({ auth, setAuth }) => {
   // const [projects, setProjects] = useState({});
@@ -14,28 +14,41 @@ const HomePage = ({ auth, setAuth }) => {
   // }, []);
   // console.log(projects);
 
+  const navigate = useNavigate();
+
   return (
     <MainLayout auth={auth}>
       <h1>Dynamic Ducks</h1>
       {auth && auth.role == "client" && (
-        <Link to={"/clientportal"} className="homepagelink">
+        <Button variant={"contained"} onClick={() => navigate("/clientportal")}>
           Client Portal
-        </Link>
+        </Button>
       )}{" "}
-      {auth && auth.role == "operationsmanagerportal" && (
-        <Link to={"/operationsmanagerportal"} className="homepagelink">
+      {auth && auth.role == "operationsManager" && (
+        <Button
+          variant={"contained"}
+          onClick={() => navigate("/operationsmanagerportal")}
+        >
           Operations Manager Portal
-        </Link>
+        </Button>
       )}
-      {auth && auth.role == "salesRepresentative" && (
-        <Link to={"/salesportal"} className="homepagelink">
+      {auth && auth.role == "sales" && (
+        <Button
+          variant={"contained"}
+          onClick={() => navigate("/salesportal")}
+          className="homepageButton"
+        >
           Sales Portal
-        </Link>
+        </Button>
       )}
       {auth && auth.role == "installationWorker" && (
-        <Link to={"/crew"} className="homepagelink">
+        <Button
+          variant={"contained"}
+          onClick={() => navigate("/crew")}
+          className="homepageButton"
+        >
           Crew Portal
-        </Link>
+        </Button>
       )}
       {auth && (
         <Button

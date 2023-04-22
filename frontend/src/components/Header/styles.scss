@@ -1,10 +1,10 @@
 .activeStyle {
-  color: rgba(30, 30, 30, 0.514);
+  color: whitesmoke;
   cursor: default;
 }
 
 .inactiveStyle {
-  color: rgb(0, 0, 0);
+  color: #66b2ff;
 }
 
 .navigation {
@@ -17,9 +17,10 @@
 }
 
 .header {
-  background-color: #f4afab; /* Replace with your desired header background color */
-  color: #000000; /* Replace with your desired header text color */
-  height: 7vh;
   img {
+    position: relative;
+    transform: translateY(15%);
+    top: 0;
+    z-index: 10;
   }
 }
