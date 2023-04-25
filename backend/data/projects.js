@@ -34,7 +34,6 @@ const getProject = async (req,res) => {
   }
 };
 
-// Get all projects a user is a part of
 const getUserProjects = async(req,res) => {
   let projectsCollection;
   try {
@@ -91,16 +90,16 @@ const deleteProject = async (req,res) => {
 
   const result = await projectsCollection.deleteOne(query)
 
-  if (deleteResult.deletedCount == 1) {
-    console.log(`Successfully deleted one project with ID ${projectID}`);
+  if (result.deletedCount == 1) {
+    console.log(`Successfully deleted one project with ID ${id}`);
     return { deleted: true };
   } else {
-    console.log(`Could not delete project with ID ${projectID}`);
+    console.log(`Could not delete project with ID ${id}`);
     return { deleted: false };
   }
 };
 
-// Update a project
+// Update a lead
 const updateProject = async (req,res) => {
   let projectsCollection;
   try {
