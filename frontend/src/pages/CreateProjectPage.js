@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProjectsLayout from "../layouts/ProjectsLayout";
 import { apiInstance } from "../utils/apiInstance";
 
+
 import "./styles.scss";
 
 const CreateProjectPage = () => {
@@ -137,21 +138,21 @@ const CreateProjectPage = () => {
                 />
 
                 <label>Assigned Manager(s)</label>
-                <select multiple onChange={(e) => setSelectedManagers(Array.from(e.target.selectedOptions, option => option.value))}>
+                <select multiple onChange={(e) => setSelectedManagers(Array.from(e.target.selectedOptions, option => option.value))} required>
                     {managers.map(manager => (
                         <option key={manager._id} value={manager._id}>{manager.firstName} {manager.lastName}</option>
                     ))}
                 </select>
 
                 <label>Assigned Worker(s)</label>
-                <select multiple onChange={(e) => setSelectedWorkers(Array.from(e.target.selectedOptions, option => option.value))}>
+                <select multiple onChange={(e) => setSelectedWorkers(Array.from(e.target.selectedOptions, option => option.value))} required>
                     {workers.map(worker => (
                         <option key={worker._id} value={worker._id}>{worker.firstName} {worker.lastName}</option>
                     ))}
                 </select>
 
                 <label>Assigned Customer(s)</label>
-                <select multiple onChange={(e) => setSelectedCustomers(Array.from(e.target.selectedOptions, option => option.value))}>
+                <select multiple onChange={(e) => setSelectedCustomers(Array.from(e.target.selectedOptions, option => option.value))} required>
                     {customers.map(customer => (
                         <option key={customer._id} value={customer._id}>{customer.firstName} {customer.lastName}</option>
                     ))}
