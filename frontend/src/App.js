@@ -96,26 +96,42 @@ function App() {
               )
             }
           />
-          
-          <Route path="/projects" element={<ProjectManagement auth={auth} />}/>
-          <Route path="/projects/createProject" element={<CreateProjectPage/>}/>
-          <Route path="/projects/:projectId/edit" element={<ProjectInfo/>}/>
+
+          <Route path="/projects" element={<ProjectManagement auth={auth} />} />
+          <Route path="/projects/createProject" element={<CreateProjectPage />} />
+          <Route path="/projects/:projectId/edit" element={<ProjectInfo />} />
           <Route path="/tasks" element={<TaskManagement />} />
-          <Route path="/leadmanagement" element={<LeadManagement />} />
 
           <Route
             path="/tasks"
             element={
               auth?.role == "installationWorker" ||
-              auth?.role == "operationsManager" ? (
+                auth?.role == "operationsManager" ? (
                 <TaskManagement />
               ) : (
                 <Navigate to={"/"} />
               )
             }
           />
-          <Route path="/leads" element={<LeadManagement />} />
-          <Route path="/leads/edit" element={<EditLeadPage />} />
+          <Route path="/leads"
+            element={
+              auth?.role == "sales" ||
+                auth?.role == "operationsManager" ? (
+                <LeadManagement />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
+          <Route path="/leads/edit"
+            element={
+              auth?.role == "sales" ? (
+                <EditLeadPage />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>

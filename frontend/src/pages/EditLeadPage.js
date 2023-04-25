@@ -1,56 +1,74 @@
 import React, { useEffect, useState } from "react";
 import { apiInstance } from "../utils/apiInstance";
 import { useLocation } from 'react-router-dom';
-import SalesLayout from "../layouts/SalesLayout";
+import MainLayout from "../layouts/MainLayout";
 
-const EditLeadPage = () => {
+export let leadExists = false;
+
+const EditLeadPage = (props) => {
     // if lead exists, update lead
     // if not, create new lead
+    const [lead, setLead] = useState([]);
+    const leadId = useLocation().state._id;
+    useEffect(() => {
+        const fetchLeads = async () => {
+            const response = await fetch('http://localhost:5000/leads/id/' + leadId)
+            const json = await response.json()
+            console.log(json)
+            if (response.ok) {
+                setLead(json[0])
+            }
+        };
+        fetchLeads()
+    }, [leadId])
 
-    const location = useLocation();
-    const lead = location.state;
-    const leadExists = lead !== undefined;
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    function submitButton() {
 
     }
 
     return (
-        // Hardcoded for demo purposes
-        <SalesLayout>
-            <h1>{leadExists ? "Edit Lead" : "Create Lead"}</h1>
+        <MainLayout>
+            <form onSubmit={handleSubmit}>
+                <h1>{leadExists ? "Edit Lead: " + lead.firstName + lead.lastName : "Create Lead"}</h1>
 
-            <div>
-                First Name
-                <input type="text" placeholder="" />
-            </div>
+                <div>
+                    <label>First Name</label>
+                    <input
+                        type="text"
+                        placeholder=""
+                        value={lead.firstName}
+                    />
+                </div>
 
-            <div>
-                Last Name
-                <input type="text" placeholder="" />
-            </div>
+                <div>
+                    <label>Last Name</label>
+                    <input
+                        type="text"
+                        placeholder=""
+                        value={lead.lastName}
+                    />
+                </div>
 
-            <div>
-                Phone Number
-                <input type="text" placeholder="" />
-                ext
-                <input type="text" placeholder="" />
-            </div>
+                <div>
+                    <label>Phone Number</label>
+                    <input
+                        type="text"
+                        placeholder=""
+                    />
+                </div>
 
-            <div>
-                Email
-                <input type="text" placeholder="" />
-            </div>
+                <div>
+                    Status
+                    <input type="checkbox" /> Following Up
+                    <input type="checkbox" /> Success
+                </div>
 
-            <div>
-                Status
-                <input type="checkbox" /> Following Up
-                <input type="checkbox" /> Success
-            </div>
+                <button>{leadExists ? "Update Lead" : "Create Lead"}</button>
 
-            <button>Update Lead</button>
-
-        </SalesLayout>
+            </form>
+        </MainLayout>
     );
 
 }

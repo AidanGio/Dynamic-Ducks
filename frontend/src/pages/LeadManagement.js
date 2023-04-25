@@ -36,7 +36,7 @@ function EditButton(lead) {
           toEditLeadPage();
         }}
       >
-        Edit
+        {lead !== undefined ? "Edit" : "Create New Lead"}
       </button>
     </div>
   );
@@ -56,6 +56,7 @@ function LeadTable({ leads }) {
           <th>Phone Number</th>
           <th>Status</th>
           <th>Actions</th>
+          <th><EditButton lead={undefined}></EditButton></th>
         </tr>
       </thead>
       <tbody>
@@ -71,7 +72,7 @@ function LeadTable({ leads }) {
               <td>{lead["Number"]}</td>
               <td>{lead["Success"] ? "Success" : "Following Up"}</td>
               <td>
-                <EditButton></EditButton>
+                <EditButton lead={lead}>Edit</EditButton>
               </td>
               <td>
                 <InvitePopup></InvitePopup>
@@ -85,7 +86,7 @@ function LeadTable({ leads }) {
   );
 }
 
-const LeadManagement = () => {
+const LeadManagement = ({ auth }) => {
   const [leads, setLeads] = useState([]);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const LeadManagement = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout auth={auth}>
       <h1>Lead Management</h1>
       <LeadTable leads={leads} />
     </MainLayout>

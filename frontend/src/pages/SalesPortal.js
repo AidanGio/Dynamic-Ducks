@@ -52,6 +52,7 @@ const SalesPortal = ({ auth }) => {
     <MainLayout auth={auth}>
       <h1>Sales Portal</h1>
       <div>
+
         <h2>Current Projects</h2>
         <ProjectTable projects={projects} />
         <h2>Past Projects</h2>
