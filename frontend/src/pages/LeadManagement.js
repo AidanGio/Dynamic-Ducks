@@ -43,9 +43,9 @@ function EditButton(value, { lead }) {
 }
 
 function LeadTable({ leads }) {
-  const deleteLead = () => {
-    apiInstance.delete();
-  };
+  const deleteLead = async ({ lead }) => {
+    apiInstance.delete("/leads/" + lead.id);
+  }
 
   return (
     <table>
@@ -77,7 +77,7 @@ function LeadTable({ leads }) {
               <td>
                 <InvitePopup></InvitePopup>
               </td>
-              <td style={{ color: "red" }}>Delete</td>
+              <td><button onClick={deleteLead(lead)} style={{ color: "red" }}>Delete</button></td>
             </tr>
           );
         })}
