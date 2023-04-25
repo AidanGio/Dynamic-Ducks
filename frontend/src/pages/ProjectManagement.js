@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProjectsLayout from "../layouts/ProjectsLayout";
+import { Link } from 'react-router-dom';
 import { apiInstance } from "../utils/apiInstance";
 
 import "./styles.scss";
@@ -28,6 +29,7 @@ const ProjectManagement = (auth) => {
         <ProjectsLayout auth={auth}>
             <br></br>
             <h1>Projects</h1>
+            <Link to={`/projects/createproject`}><strong>Create Project</strong></Link>                
             <div>
             {projects && projects.map((project) => (
                     <ProjectDetails key={project._id} project={project} />

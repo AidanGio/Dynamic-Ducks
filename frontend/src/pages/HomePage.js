@@ -15,6 +15,39 @@ const HomePage = ({ auth, setAuth }) => {
   // console.log(projects);
 
   const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const userId = user._id; // get the _id of the logged-in user
+  console.log(userId);
+
+function sendProjectNotification(userId) {
+  fetch(`http://localhost:5000/calendar/${userId}`)
+    .then(response => response.json())
+    .then(data => {
+      const currentDate = new Date();
+      const upcomingProjects = data.filter(project => new Date(project.endDate) >= currentDate);
+      if (upcomingProjects.length > 0) {
+        upcomingProjects.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+        const project = upcomingProjects[0];
+        const notification = new Notification(`Upcoming Project: ${project.name}`, {
+          body: `Start date: ${project.startDate}\nEnd date: ${project.endDate}`,
+          icon: 'frontend/src/assets/images/solar.png',
+        });
+        notification.addEventListener('click', () => {
+          console.log('Notification clicked!');
+        });
+      } else {
+        console.warn('No upcoming projects.');
+      }
+    })
+    .catch(error => console.error('Error fetching project data:', error));
+}
+
+// Ask for permission to show notifications
+if (Notification.permission !== 'granted') {
+  Notification.requestPermission();
+}
+sendProjectNotification(userId);
+
 
   return (
     <MainLayout auth={auth}>
