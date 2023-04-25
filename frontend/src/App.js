@@ -9,8 +9,8 @@ import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
 import ProjectManagement from "./pages/ProjectManagement";
-import CreateProjectPage from "./pages/CreateProjectPage"
-import ProjectInfo from "./pages/ProjectInfo"
+import CreateProjectPage from "./pages/CreateProjectPage";
+import ProjectInfo from "./pages/ProjectInfo";
 
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
@@ -19,10 +19,12 @@ import EditLeadPage from "./pages/EditLeadPage";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [auth, setAuth] = useState(JSON.parse(sessionStorage.getItem("user")));
+  const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("user")));
+
+  console.log(auth);
 
   // useEffect(() => {
-  //   setAuth(JSON.parse(sessionStorage.getItem("user")));
+  //   setAuth(JSON.parse(localStorage.getItem("user")));
   // }, []);
 
   return (
@@ -99,6 +101,10 @@ function App() {
 
           <Route path="/projects" element={<ProjectManagement auth={auth} />} />
           <Route path="/projects/createProject" element={<CreateProjectPage />} />
+          <Route
+            path="/projects/createProject"
+            element={<CreateProjectPage />}
+          />
           <Route path="/projects/:projectId/edit" element={<ProjectInfo />} />
           <Route path="/tasks" element={<TaskManagement />} />
 

@@ -90,11 +90,11 @@ const deleteProject = async (req,res) => {
 
   const result = await projectsCollection.deleteOne(query)
 
-  if (deleteResult.deletedCount == 1) {
-    console.log(`Successfully deleted one project with ID ${projectID}`);
+  if (result.deletedCount == 1) {
+    console.log(`Successfully deleted one project with ID ${id}`);
     return { deleted: true };
   } else {
-    console.log(`Could not delete project with ID ${projectID}`);
+    console.log(`Could not delete project with ID ${id}`);
     return { deleted: false };
   }
 };

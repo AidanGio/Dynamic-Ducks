@@ -23,7 +23,6 @@ const Header = ({ title, auth }) => {
             Home
           </NavLink>
         )}
-
         {auth &&
           (auth.role == "installationWorker" ||
             auth.role == "operationsManager") && (
@@ -76,6 +75,17 @@ const Header = ({ title, auth }) => {
             Projects
           </NavLink>
         )}
+        {auth &&
+          (auth.role == "sales") && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "activeStyle" : "inactiveStyle"
+              }
+              to={"/leads"}
+            >
+              Leads
+            </NavLink>
+          )}
       </div>
     </header>
   );

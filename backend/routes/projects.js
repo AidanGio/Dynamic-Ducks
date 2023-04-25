@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const result = await getAllProjects();
-    res.json(result);
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const result = await getProject(req,res);
-    res.json(result);
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
 router.get("/user/:id", async (req, res) => {
   try {
     const result = await getUserProjects(req,res);
-    res.json(result);
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
