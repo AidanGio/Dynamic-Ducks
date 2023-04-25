@@ -24,14 +24,15 @@ const SignInPage = ({ setAuth, auth }) => {
       })
       .then((res) => {
         if (res.data.role) {
-          sessionStorage.setItem("user", JSON.stringify(res.data));
-          setAuth(JSON.parse(sessionStorage.getItem("user")));
-          console.log(JSON.parse(sessionStorage.getItem("user")));
+          localStorage.setItem("user", JSON.stringify(res.data));
+          setAuth(JSON.parse(localStorage.getItem("user")));
+          console.log(JSON.parse(localStorage.getItem("user")));
           navigate("/");
         }
       })
       .catch((e) => {
         setError(e);
+        alert(e);
         console.log(e);
       });
 

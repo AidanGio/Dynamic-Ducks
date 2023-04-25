@@ -53,7 +53,7 @@ const HomePage = ({ auth, setAuth }) => {
       {auth && (
         <Button
           onClick={() => {
-            sessionStorage.removeItem("user");
+            localStorage.removeItem("user");
             setAuth(null);
           }}
         >

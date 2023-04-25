@@ -5,7 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 
 const Dashboard = () => {
   const [calendarEvents, setCalendarEvents] = useState([]);
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const userId = user._id; // get the _id of the logged-in user
   console.log(userId);
   useEffect(() => {
@@ -26,15 +26,14 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <FullCalendar 
-      plugins={[dayGridPlugin]} 
-      initialView="dayGridMonth" 
-      events={calendarEvents} 
-      timeZone="America/New_York" 
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={calendarEvents}
+        timeZone="America/New_York"
       />
     </div>
   );
 };
 
 export default Dashboard;
-
