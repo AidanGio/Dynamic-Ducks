@@ -64,10 +64,10 @@ const createLead = async (req, res) => {
     let result
     try {
         result = await leadsCollection.insertOne( req.body )
+        return result;
     } catch(error) {
         console.log(error)
     }
-    console.log(result)
 };
 
 // delete lead
@@ -85,6 +85,7 @@ const deleteLead = async (req, res) => {
 
     try {
         const result = await leadsCollection.deleteOne(query)
+        return result;
     } catch (error) {
         console.log(error)
     }
@@ -104,7 +105,8 @@ const updateLead = async (req, res) => {
     const update = { $set: req.body };
 
     try {
-        const result = await leadsCollection.updateOne(query,update)
+        const result = await leadsCollection.updateOne(query,update);
+        return result
     } catch (error) {
         console.log(error)
     }
