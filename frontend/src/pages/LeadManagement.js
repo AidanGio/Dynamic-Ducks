@@ -4,10 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiInstance } from "../utils/apiInstance";
 import "./styles.scss";
 import MainLayout from "../layouts/MainLayout";
+import { Button } from "@mui/material";
 
 function InvitePopup() {
   return (
-    <Popup trigger={<button> Invite </button>} position="right center">
+    <Popup
+      trigger={<Button variant={"contained"}> Invite </Button>}
+      position="right center"
+    >
       <div
         style={{
           backgroundColor: "white",
@@ -25,19 +29,17 @@ function InvitePopup() {
 function EditButton(lead) {
   const navigate = useNavigate();
 
-  const toEditLeadPage = () => {
-    navigate("/leads/edit", { state: lead });
-  };
+  const toEditLeadPage = () => {};
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
-          toEditLeadPage();
+          navigate("/leads/edit", { state: lead });
         }}
       >
         Edit
-      </button>
+      </Button>
     </div>
   );
 }
@@ -59,12 +61,13 @@ function LeadTable({ leads }) {
         </tr>
       </thead>
       <tbody>
-        {leads.map((lead) => {
+        {leads.map((lead, i) => {
           return (
             <tr
               style={{
                 boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
               }}
+              key={i}
             >
               <td>{lead["FirstName"]}</td>
               <td>{lead["LastName"]}</td>
@@ -76,7 +79,9 @@ function LeadTable({ leads }) {
               <td>
                 <InvitePopup></InvitePopup>
               </td>
-              <td style={{ color: "red" }}>Delete</td>
+              <td>
+                <Button color={"warning"}>Delete</Button>
+              </td>
             </tr>
           );
         })}
@@ -85,7 +90,7 @@ function LeadTable({ leads }) {
   );
 }
 
-const LeadManagement = () => {
+const LeadManagement = ({ auth }) => {
   const [leads, setLeads] = useState([]);
 
   useEffect(() => {
@@ -97,7 +102,7 @@ const LeadManagement = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout auth={auth}>
       <h1>Lead Management</h1>
       <LeadTable leads={leads} />
     </MainLayout>

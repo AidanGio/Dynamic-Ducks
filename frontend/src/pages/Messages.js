@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import "./styles.scss";
+import { Button } from "@mui/material";
 
 const initialMessages = [
   {
@@ -77,9 +78,13 @@ const MessagePortal = ({ auth }) => {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />
-          <button className="send-button" onClick={handleNewMessage}>
+          <Button
+            variant={"contained"}
+            className="send-button"
+            onClick={handleNewMessage}
+          >
             Send
-          </button>
+          </Button>
         </div>
       </div>
     </MainLayout>
@@ -87,5 +92,3 @@ const MessagePortal = ({ auth }) => {
 };
 
 export default MessagePortal;
-
-

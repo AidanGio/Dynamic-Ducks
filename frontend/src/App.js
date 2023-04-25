@@ -119,7 +119,7 @@ function App() {
               )
             }
           />
-          <Route path="/leads" element={<LeadManagement />} />
+          <Route path="/leads" element={<LeadManagement auth={auth} />} />
           <Route path="/leads/edit" element={<EditLeadPage />} />
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
