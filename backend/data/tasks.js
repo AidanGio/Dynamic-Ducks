@@ -13,7 +13,7 @@ const getAllTasks = async () => {
   return res;
 };
 
-// Get all tasks under a single project
+// Get all tasks under a single owner
 const getTasks = async (req, res) => {
   let tasksCollection;
   try {
@@ -24,7 +24,7 @@ const getTasks = async (req, res) => {
 
   const { id } = req.params;
 
-  const query = { _id: new ObjectId(id) };
+  const query = { owner: id };
 
   try {
     const allTasks = await tasksCollection.find(query).toArray();
@@ -34,7 +34,7 @@ const getTasks = async (req, res) => {
   }
 };
 
-// Get a task under a single project
+// Get a task by task id
 const getTask = async (req, res) => {
   let tasksCollection;
   try {
@@ -86,7 +86,7 @@ const deleteTask = async (req, res) => {
 
   const result = await tasksCollection.deleteOne(query);
 
-  if (deleteResult.deletedCount == 1) {
+  if (result.deletedCount == 1) {
     console.log(`Successfully deleted one task with ID ${id}`);
     return { deleted: true };
   } else {
