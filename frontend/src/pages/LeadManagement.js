@@ -22,7 +22,7 @@ function InvitePopup() {
   );
 }
 
-function EditButton({ lead }, { leadExists }) {
+function EditButton(value, { lead }) {
   const navigate = useNavigate();
 
   const toEditLeadPage = () => {
@@ -36,7 +36,7 @@ function EditButton({ lead }, { leadExists }) {
           toEditLeadPage();
         }}
       >
-        {{ leadExists } ? "Edit" : "Create New Lead"}
+        {value.children}
       </button>
     </div>
   );
@@ -56,7 +56,7 @@ function LeadTable({ leads }) {
           <th>Phone Number</th>
           <th>Status</th>
           <th>Actions</th>
-          <th><EditButton leadExists={false}></EditButton></th>
+          <th><EditButton>Create New Lead</EditButton></th>
         </tr>
       </thead>
       <tbody>
@@ -72,7 +72,7 @@ function LeadTable({ leads }) {
               <td>{lead["Number"]}</td>
               <td>{lead["Success"] ? "Success" : "Following Up"}</td>
               <td>
-                <EditButton lead={lead} leadExists={true}></EditButton>
+                <EditButton lead={lead}>Edit</EditButton>
               </td>
               <td>
                 <InvitePopup></InvitePopup>
