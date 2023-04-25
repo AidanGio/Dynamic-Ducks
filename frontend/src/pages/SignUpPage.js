@@ -24,7 +24,6 @@ const SignUpPage = () => {
 
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [securityQuestion, setSecurityQuestion] = useState();
   const [securityAnswer, setSecurityAnswer] = useState();
   const [error, setError] = useState({ error: false });
 
@@ -39,7 +38,7 @@ const SignUpPage = () => {
       email,
       phoneNumber,
       password,
-      securityQuestion,
+      question,
       securityAnswer,
     };
 
@@ -117,7 +116,7 @@ const SignUpPage = () => {
             id="securityQ"
             placeholder="SecurityQuestion"
             onChange={(e) => {
-              setSecurityQuestion(e.target.value);
+              setQuestion(e.target.value);
             }}
             value={question}
           >
@@ -137,7 +136,6 @@ const SignUpPage = () => {
             <MenuItem value={"Q6"}>
               In what city or town was your first job?
             </MenuItem>
-            a
             <MenuItem value={"Q7"}>
               What is your maternal grandmother's maiden name?
             </MenuItem>
