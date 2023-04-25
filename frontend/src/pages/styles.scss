@@ -115,7 +115,7 @@ td {
   width: 60px;
   padding: 10px;
   color: white;
-  background-color: #001E3C
+  background-color: #001e3c;
 }
 
 .taskmanagement {
@@ -153,11 +153,15 @@ td {
       margin: 5px 0;
     }
   }
-  
+}
+
+form {
+  div {
+    margin: 5px 0;
+  }
 }
 
 #select1,
 #securityQ {
   padding: 3px;
 }
-

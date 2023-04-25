@@ -57,7 +57,9 @@ const HomePage = ({ auth, setAuth }) => {
 
   return (
     <MainLayout auth={auth}>
-      <h1>Dynamic Ducks</h1>
+      <h2>Dynamic Ducks</h2>
+      <p> Welcome {auth.firstName + " " + auth.lastName}</p>
+      <br />
       {auth && auth.role == "client" && (
         <Button variant={"contained"} onClick={() => navigate("/clientportal")}>
           Client Portal
