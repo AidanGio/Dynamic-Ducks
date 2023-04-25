@@ -34,6 +34,7 @@ const getProject = async (req,res) => {
   }
 };
 
+// Get all projects a user is a part of
 const getUserProjects = async(req,res) => {
   let projectsCollection;
   try {
@@ -99,7 +100,7 @@ const deleteProject = async (req,res) => {
   }
 };
 
-// Update a lead
+// Update a project
 const updateProject = async (req,res) => {
   let projectsCollection;
   try {
