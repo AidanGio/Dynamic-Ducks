@@ -88,7 +88,7 @@ const SignInPage = ({ setAuth, auth }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Link
-            to={"./ForgotPassword.js"}
+            to={"/forgotpassword"}
             style={{
               textDecoration: "none",
               textAlign: "right",

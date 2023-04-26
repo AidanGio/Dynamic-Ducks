@@ -18,6 +18,7 @@ import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
 import EditLeadPage from "./pages/EditLeadPage";
 import { useEffect, useState } from "react";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("user")));
@@ -108,6 +109,7 @@ function App() {
           <Route path="/projects/:projectId/edit" element={<ProjectInfo />} />
           <Route path="/tasks" element={<TaskManagement />} />
           <Route path="/leadmanagement" element={<LeadManagement />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
 
           <Route
             path="/tasks"
