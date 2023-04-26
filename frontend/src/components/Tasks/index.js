@@ -16,7 +16,7 @@ const Tasks = ({ data }) => {
               return (
                 <TaskCard
                   key={i}
-                  name={o.company ? o.company : "N/A"}
+                  name={o.task ? o.task : "N/A"}
                   priority={o.priority ? o.priority : "N/A"}
                 />
               );

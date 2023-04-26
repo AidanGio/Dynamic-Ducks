@@ -5,6 +5,7 @@ import SideBar from "../components/SideBar";
 import Tasks from "../components/Tasks";
 
 import "./styles.scss";
+import { apiInstance } from "../utils/apiInstance";
 
 //Hardcoded for now
 const taskData = [
@@ -23,6 +24,12 @@ const TaskManagement = () => {
   const [openTasks, setOpenTasks] = useState(false);
   const [openDashboard, setOpenDashboard] = useState(true);
 
+  const [tasks, setTasks] = useState();
+
+  useEffect(() => {
+    apiInstance.get("/tasks").then((res) => setTasks(res.data));
+  }, []);
+
   return (
     <div className="taskmanagement">
       <SideBar
@@ -31,7 +38,7 @@ const TaskManagement = () => {
         openTasks={openTasks}
         setOpenTasks={setOpenTasks}
       />
-      {openTasks && <Tasks data={taskData} />}
+      {openTasks && <Tasks data={tasks} />}
       {openDashboard && <Dashboard />}
     </div>
   );

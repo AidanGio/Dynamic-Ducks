@@ -8,6 +8,7 @@ import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
+import CreateLeadPage from "./pages/CreateLeadPage";
 import ProjectManagement from "./pages/ProjectManagement";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import ProjectInfo from "./pages/ProjectInfo";
@@ -17,6 +18,7 @@ import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
 import EditLeadPage from "./pages/EditLeadPage";
 import { useEffect, useState } from "react";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("user")));
@@ -107,6 +109,8 @@ function App() {
           />
           <Route path="/projects/:projectId/edit" element={<ProjectInfo />} />
           <Route path="/tasks" element={<TaskManagement />} />
+          <Route path="/leadmanagement" element={<LeadManagement />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
 
           <Route
             path="/tasks"
@@ -123,13 +127,14 @@ function App() {
             element={
               auth?.role == "sales" ||
                 auth?.role == "operationsManager" ? (
-                <LeadManagement />
+                <LeadManagement auth={auth} />
               ) : (
                 <Navigate to={"/"} />
               )
             }
           />
-          <Route path="/leads/edit"
+          <Route path="/leads/create" element={<CreateLeadPage auth={auth} />}></Route>
+          <Route path="/leads/:leadId/edit"
             element={
               auth?.role == "sales" ? (
                 <EditLeadPage />
@@ -138,6 +143,7 @@ function App() {
               )
             }
           />
+
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>

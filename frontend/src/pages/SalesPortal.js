@@ -19,12 +19,13 @@ function ProjectTable({ projects }) {
         </tr>
       </thead>
       <tbody>
-        {projects.map((project) => {
+        {projects.map((project, i) => {
           return (
             <tr
               style={{
                 boxShadow: "0px 0px 0px 1px rgb(0, 0, 0)",
               }}
+              key={i}
             >
               <td>{project["name"]}</td>
               <td>{project["startDate"]}</td>

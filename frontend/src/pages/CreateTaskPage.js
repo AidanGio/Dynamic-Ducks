@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { apiInstance } from "../utils/apiInstance";
+import { Input } from "@mui/material";
 
 const CreateTaskPage = () => {
   const [options, setOptions] = useState([]);
@@ -12,7 +13,7 @@ const CreateTaskPage = () => {
     e.preventDefault();
 
     let task = e.target.task.value;
-    let proirity = e.target.priority.value;
+    let priority = e.target.priority.value;
     let type = e.target.type.value;
 
     let address = e.target.address.value;
@@ -20,7 +21,7 @@ const CreateTaskPage = () => {
 
     console.log(owner);
 
-    let data = { task, proirity, type, address, owner };
+    let data = { task, priority, type, address, owner };
 
     apiInstance.post("/tasks", { ...data }).then((res) => {
       console.log(res);
@@ -30,10 +31,10 @@ const CreateTaskPage = () => {
     <div className="create-task">
       <h2>Create Task</h2>
       <form id="create-task" onSubmit={handleSubmit}>
-        <input required placeholder="Task" name="task" />
-        <input required placeholder="Proirity" name="priority" />
-        <input required placeholder="Type" name="type" />
-        <input required placeholder="Address" name="address" />
+        <Input required placeholder="Task" name="task" />
+        <Input required placeholder="Priority" name="priority" />
+        <Input required placeholder="Type" name="type" />
+        <Input required placeholder="Address" name="address" />
 
         {options !== null && (
           <label>
