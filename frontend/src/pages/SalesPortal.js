@@ -1,6 +1,7 @@
 import React from "react";
 import { apiInstance } from "../utils/apiInstance";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import MainLayout from "../layouts/MainLayout";
 
@@ -49,10 +50,17 @@ const SalesPortal = ({ auth }) => {
     apiInstance.get("/projects").then((res) => setProjects(res.data));
   }, []);
 
+  const navigate = useNavigate();
+
+  const toLeadPage = () => {
+    navigate("/leads");
+  };
+
   return (
     <MainLayout auth={auth}>
       <h1>Sales Portal</h1>
       <div>
+        <button onClick={toLeadPage}>View all Leads</button>
         <h2>Current Projects</h2>
         <ProjectTable projects={projects} />
         <h2>Past Projects</h2>

@@ -102,6 +102,7 @@ function App() {
           />
 
           <Route path="/projects" element={<ProjectManagement auth={auth} />} />
+          <Route path="/projects/createProject" element={<CreateProjectPage />} />
           <Route
             path="/projects/createProject"
             element={<CreateProjectPage />}
@@ -115,17 +116,34 @@ function App() {
             path="/tasks"
             element={
               auth?.role == "installationWorker" ||
-              auth?.role == "operationsManager" ? (
+                auth?.role == "operationsManager" ? (
                 <TaskManagement />
               ) : (
                 <Navigate to={"/"} />
               )
             }
           />
-          <Route path="/leads" element={<LeadManagement auth={auth} />} />
-          <Route path="/leads/create" element={<CreateLeadPage auth={auth}/>}></Route>
-          <Route path="/leads/:leadId/edit" element={<EditLeadPage />} />
-        
+          <Route path="/leads"
+            element={
+              auth?.role == "sales" ||
+                auth?.role == "operationsManager" ? (
+                <LeadManagement auth={auth} />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
+          <Route path="/leads/create" element={<CreateLeadPage auth={auth} />}></Route>
+          <Route path="/leads/:leadId/edit"
+            element={
+              auth?.role == "sales" ? (
+                <EditLeadPage />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
+
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>

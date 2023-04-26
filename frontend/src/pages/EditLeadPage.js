@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiInstance } from "../utils/apiInstance";
 import { useParams } from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ProjectsLayout from "../layouts/ProjectsLayout";
 
 
@@ -37,45 +37,44 @@ const EditLeadPage = () => {
             <h1>Update Lead</h1>
             <form onSubmit={handleSubmit}>
 
-            <label>First Name</label>
-            <input
-                type="text"
-                name="FirstName"
-                onChange={handleFieldChange}
-                value={updatedLead.FirstName || ''}
-            />
+                <label>First Name</label>
+                <input
+                    type="text"
+                    name="FirstName"
+                    onChange={handleFieldChange}
+                    value={updatedLead.FirstName || ''}
+                />
 
-            <label>Last Name</label>
-            <input
-                type="text"
-                name="LastName"
-                onChange={handleFieldChange}
-                value={updatedLead.LastName || ''}
-            />
-            
-            <label>Number</label>
-            <input
-                type="text"
-                name="Number"
-                onChange={handleFieldChange}
-                value={updatedLead.Number || ''}
-            />
-     
-            <label>Status</label>
-            <select name="Status" value={updatedLead.Status || ''} onChange={handleFieldChange}>
+                <label>Last Name</label>
+                <input
+                    type="text"
+                    name="LastName"
+                    onChange={handleFieldChange}
+                    value={updatedLead.LastName || ''}
+                />
+
+                <label>Number</label>
+                <input
+                    type="text"
+                    name="Number"
+                    onChange={handleFieldChange}
+                    value={updatedLead.Number || ''}
+                />
+
+                <label>Status</label>
+                <select name="Status" value={updatedLead.Status || ''} onChange={handleFieldChange}>
                     <option value=""></option>
                     <option value="Exploring">Exploring</option>
                     <option value="Success">Success</option>
                     <option value="Failed">Failed</option>
-            </select>
+                </select>
 
-            <button>Update Project</button>
+                <button>Update Project</button>
 
             </form>
         </ProjectsLayout>
     )
 
-    
 }
 
 export default EditLeadPage;

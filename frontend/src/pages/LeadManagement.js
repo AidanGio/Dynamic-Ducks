@@ -28,10 +28,10 @@ function InvitePopup() {
   );
 }
 
-function EditButton(lead) {
+function EditButton(value, { lead }) {
   const navigate = useNavigate();
 
-  const toEditLeadPage = () => {};
+  const toEditLeadPage = () => { };
 
   return (
     <div>
@@ -50,11 +50,11 @@ function LeadTable({ leads }) {
 
   const handleClick = async (leadId) => {
     const response = await fetch('http://localhost:5000/leads/' + leadId, {
-        method: 'DELETE'
+      method: 'DELETE'
     })
     window.location.reload()
     const json = await response.json()
-  } 
+  }
 
   const deleteLead = () => {
     apiInstance.delete();
@@ -69,6 +69,7 @@ function LeadTable({ leads }) {
           <th>Phone Number</th>
           <th>Status</th>
           <th>Actions</th>
+          <th><EditButton>Create New Lead</EditButton></th>
         </tr>
       </thead>
       <tbody>
@@ -87,7 +88,7 @@ function LeadTable({ leads }) {
               <td>
                 <div>
                   <Link to={`/leads/${lead._id}/edit`}><strong>Update</strong></Link>
-              </div>
+                </div>
               </td>
               <td>
                 <InvitePopup></InvitePopup>
