@@ -14,28 +14,7 @@ const getAllProjects = async () => {
 };
 
 // Get a single proejct
-const getProject = async (req,res) => {
-  let projectsCollection;
-  try {
-    projectsCollection = await projects();
-  } catch (error) {
-    console.log(error);
-  }
-
-  const {id} = req.params
- 
-  const query = { _id: new ObjectId(id) };
-
-  try {
-    const aProject = await projectsCollection.find(query).toArray();
-    return aProject;
-  } catch (error) {
-      console.log(error)
-  }
-};
-
-// Get all projects a user is a part of
-const getUserProjects = async(req,res) => {
+const getProject = async (req, res) => {
   let projectsCollection;
   try {
     projectsCollection = await projects();
@@ -45,23 +24,45 @@ const getUserProjects = async(req,res) => {
 
   const { id } = req.params;
 
-  const query = {$or: [
-      {AssignedManagers: {$in: [id]}},
-      {AssignedWorkers: {$in: [id]}},
-      {AssignedCustomers: {$in: [id]}}
-  ]}
+  const query = { _id: new ObjectId(id) };
 
   try {
     const aProject = await projectsCollection.find(query).toArray();
     return aProject;
   } catch (error) {
-      console.log(error)
+    console.log(error);
+  }
+};
+
+// Get all projects a user is a part of
+const getUserProjects = async (req, res) => {
+  let projectsCollection;
+  try {
+    projectsCollection = await projects();
+  } catch (error) {
+    console.log(error);
   }
 
-}
+  const { id } = req.params;
+
+  const query = {
+    $or: [
+      { AssignedManagers: { $in: [id] } },
+      { AssignedWorkers: { $in: [id] } },
+      { AssignedCustomers: { $in: [id] } },
+    ],
+  };
+
+  try {
+    const aProject = await projectsCollection.find(query).toArray();
+    return aProject;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Create a project
-const createProject = async (req,res) => {
+const createProject = async (req, res) => {
   let projectsCollection;
   try {
     projectsCollection = await projects();
@@ -78,7 +79,7 @@ const createProject = async (req,res) => {
 };
 
 // Delete a project
-const deleteProject = async (req,res) => {
+const deleteProject = async (req, res) => {
   let projectsCollection;
   try {
     projectsCollection = await projects();
@@ -86,10 +87,10 @@ const deleteProject = async (req,res) => {
     console.log(error);
   }
 
-  const {id} = req.params
+  const { id } = req.params;
   const query = { _id: new ObjectId(id) };
 
-  const result = await projectsCollection.deleteOne(query)
+  const result = await projectsCollection.deleteOne(query);
 
   if (deleteResult.deletedCount == 1) {
     console.log(`Successfully deleted one project with ID ${projectID}`);
@@ -101,7 +102,7 @@ const deleteProject = async (req,res) => {
 };
 
 // Update a project
-const updateProject = async (req,res) => {
+const updateProject = async (req, res) => {
   let projectsCollection;
   try {
     projectsCollection = await projects();
@@ -109,17 +110,16 @@ const updateProject = async (req,res) => {
     console.log(error);
   }
 
-  const {id} = req.params
+  const { id } = req.params;
   const query = { _id: new ObjectId(id) };
   const update = { $set: req.body };
 
   try {
-    const result = await projectsCollection.updateOne(query,update)
+    const result = await projectsCollection.updateOne(query, update);
   } catch (error) {
-      console.log(error)
+    console.log(error);
   }
 };
-
 
 export {
   getAllProjects,

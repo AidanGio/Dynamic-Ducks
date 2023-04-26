@@ -128,6 +128,9 @@ const CreateProjectPage = () => {
     getCustomers();
   }, []);
 
+  console.log(selectedWorkers);
+  console.log(selectedManagers);
+
   return (
     <ProjectsLayout>
       <form className="create" onSubmit={handleSubmit}>
@@ -200,7 +203,9 @@ const CreateProjectPage = () => {
           ))}
         </Select>
 
-        <Button variant={"contained"}>Create Project</Button>
+        <Button type={"submit"} variant={"contained"}>
+          Create Project
+        </Button>
         {error && <div className="error">{error}</div>}
       </form>
     </ProjectsLayout>
