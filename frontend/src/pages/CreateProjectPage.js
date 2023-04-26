@@ -189,7 +189,7 @@ const CreateProjectPage = () => {
         <InputLabel>Assigned Customer(s)</InputLabel>
         <Select
           multiple
-          onChange={(e) => setSelectedWorkers(e.target.value)}
+          onChange={(e) => setSelectedCustomers(e.target.value)}
           value={selectedCustomers}
           required
         >
