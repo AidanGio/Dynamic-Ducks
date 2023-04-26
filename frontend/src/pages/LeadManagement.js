@@ -5,6 +5,8 @@ import { apiInstance } from "../utils/apiInstance";
 import "./styles.scss";
 import MainLayout from "../layouts/MainLayout";
 import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
 
 function InvitePopup() {
   return (
@@ -45,6 +47,15 @@ function EditButton(lead) {
 }
 
 function LeadTable({ leads }) {
+
+  const handleClick = async (leadId) => {
+    const response = await fetch('http://localhost:5000/leads/' + leadId, {
+        method: 'DELETE'
+    })
+    window.location.reload()
+    const json = await response.json()
+  } 
+
   const deleteLead = () => {
     apiInstance.delete();
   };
@@ -72,15 +83,22 @@ function LeadTable({ leads }) {
               <td>{lead["FirstName"]}</td>
               <td>{lead["LastName"]}</td>
               <td>{lead["Number"]}</td>
-              <td>{lead["Success"] ? "Success" : "Following Up"}</td>
+              <td>{lead["Status"]}</td>
               <td>
-                <EditButton></EditButton>
+                <div>
+                  <Link to={`/leads/${lead._id}/edit`}><strong>Update</strong></Link>
+              </div>
               </td>
               <td>
                 <InvitePopup></InvitePopup>
               </td>
               <td>
-                <Button color={"warning"}>Delete</Button>
+                <Button
+                  color={"warning"}
+                  onClick={() => handleClick(lead._id)}
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           );
@@ -93,6 +111,9 @@ function LeadTable({ leads }) {
 const LeadManagement = ({ auth }) => {
   const [leads, setLeads] = useState([]);
 
+  const navigate = useNavigate();
+
+
   useEffect(() => {
     fetchLeads();
   }, []);
@@ -104,6 +125,12 @@ const LeadManagement = ({ auth }) => {
   return (
     <MainLayout auth={auth}>
       <h1>Lead Management</h1>
+      <Button
+        variant={"contained"}
+        onClick={() => navigate("/leads/create")}
+      >
+        <AddIcon /> Create Lead
+      </Button>
       <LeadTable leads={leads} />
     </MainLayout>
   );

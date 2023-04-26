@@ -43,7 +43,8 @@ const getSuccessfulLeads = async (req, res) => {
       console.log(error);
     }
      
-    const query = {Success:"True"};
+    //const query = {Success:"True"};
+    const query = {Status:"Success"};
 
     try {
         const Leads = await leadsCollection.find(query).toArray();

@@ -8,6 +8,7 @@ import GroundsCrewPortal from "./pages/GroundsCrewPortal";
 import OperationsManagerPortal from "./pages/OperationsManagerPortal";
 import TaskManagement from "./pages/TaskManagement";
 import LeadManagement from "./pages/LeadManagement";
+import CreateLeadPage from "./pages/CreateLeadPage";
 import ProjectManagement from "./pages/ProjectManagement";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import ProjectInfo from "./pages/ProjectInfo";
@@ -120,7 +121,9 @@ function App() {
             }
           />
           <Route path="/leads" element={<LeadManagement auth={auth} />} />
-          <Route path="/leads/edit" element={<EditLeadPage />} />
+          <Route path="/leads/create" element={<CreateLeadPage auth={auth}/>}></Route>
+          <Route path="/leads/:leadId/edit" element={<EditLeadPage />} />
+        
           <Route path="/tasks/create" element={<CreateTaskPage />} />
         </Routes>
       </BrowserRouter>
