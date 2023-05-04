@@ -7,6 +7,10 @@ import {
   userLogin,
 } from "../data/users.js";
 
+import {
+  createPhoto,
+} from "../data/uploadFiles.js";
+
 import bcrypt from "bcrypt";
 
 // let User = require("../models/user.model");
@@ -113,5 +117,16 @@ router.route("/:id").delete(async (req, res) => {
 //     })
 //     .catch((err) => res.status(400).json("Error: " + err));
 // });
+
+// Upload photo
+router.post("/upload/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let result = await createPhoto(req, id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 export default router;
