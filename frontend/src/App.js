@@ -12,7 +12,8 @@ import CreateLeadPage from "./pages/CreateLeadPage";
 import ProjectManagement from "./pages/ProjectManagement";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import ProjectInfo from "./pages/ProjectInfo";
-
+import PhotoUpload from "./pages/PhotoUpload";
+import ViewPhoto from "./pages/ViewPhoto";
 import MessagePortal from "./pages/Messages";
 import "./App.scss";
 import CreateTaskPage from "./pages/CreateTaskPage";
@@ -100,7 +101,8 @@ function App() {
               )
             }
           />
-
+          <Route path="/users/upload/:id" element={<PhotoUpload/>} />
+          <Route path="/users/view/:id" element={<ViewPhoto/>} />
           <Route path="/projects" element={<ProjectManagement auth={auth} />} />
           <Route path="/projects/createProject" element={<CreateProjectPage />} />
           <Route
